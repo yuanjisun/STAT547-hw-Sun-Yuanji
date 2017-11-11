@@ -12,6 +12,7 @@ output: html_document
     - I ran into difficulty in telling the difference between `%>%` and `%$%`. This is solved by Googling.
     - It is quite difficult to subset a pattern from a string. I thought it was easy but I was wrong. The best way to solve this problem is to try by myself and Google it when having difficulty.
     - Another difficult issue is to understand the error message in RStudio. Sometimes it doesn't make any sense. If I expand the message, I find that I cannot understand them at all. So I fix bugs in a slow way.
+    - I am confused which library is in which package. So I loaded almost all potential useful packages.
 
 2. Useful rescources
 
@@ -253,10 +254,14 @@ Answer:
 I selected the several questions above to practise. First, I created a nested dataframe by `country` and `continent` seperately.
 ```{r}
 # Nest by country
-(gapminder_nest_country <- nest(gapminder, 'country', .key = 'nest_country'))
+(gapminder_nest_country <- gapminder %>%
+         group_by(country) %>%
+         nest('country', .key = 'data_by_country'))
 
 # Nest by continent
-(gapminder_nest_continent <- nest(gapminder, 'continent', .key = 'nest_continent'))
+(gapminder_nest_continent <- gapminder %>%
+        group_by(continent) %>%
+        nest('continent', .key = 'data_by_continent'))
 ```
 
 For the function of the model fit, I finished this in Part 1 which will not be repeated here again.
