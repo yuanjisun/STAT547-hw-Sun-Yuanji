@@ -31,11 +31,13 @@ This homework is not easy. Although many problems occurred, I learned a lot from
 library(tidyverse)
 library(stringr)
 library(gapminder)
+library(ggmap)
 library(purrr)
 library(repurrrsive)
 library(ggplot2)
 library(dplyr)
 library(robustbase)
+library(listviewer)
 ```
 
 # Overview
@@ -61,8 +63,8 @@ Level 1: The function is used to establish a __robust regression__ model and cal
 # Write the function
 lifeExp2year <- function(country_input, offset = 1952) {
         data <- filter(gapminder, country == country_input)
-        the_fit <- lmrob(lifeExp ~ I(year - offset), data)
-        setNames(coef(the_fit), c("intercept", "slope"))
+        model <- lmrob(lifeExp ~ I(year - offset), data)
+        setNames(coef(model), c("intercept", "slope"))
 }
 
 # Test on several countries
@@ -80,8 +82,8 @@ lifeExp2year <- function(country_input, offset = 1952) {
                 stop
         }
         data <- filter(gapminder, country == country_input)
-        the_fit <- lmrob(lifeExp ~ I(year - offset), data)
-        setNames(coef(the_fit), c("intercept", "slope"))
+        model <- lmrob(lifeExp ~ I(year - offset), data)
+        setNames(coef(model), c("intercept", "slope"))
 }
 
 # Test on wrong country name (Spell in a wrong way to test the warning/error message)
@@ -96,8 +98,8 @@ lifeExp2year <- function(country_input, offset = 1952) {
                 stop('Invalid country name. Please try again.')
         }
         data <- filter(gapminder, country == country_input)
-        the_fit <- lmrob(lifeExp ~ I(year - offset), data)
-        print(setNames(coef(the_fit), c("intercept", "slope")))
+        model <- lmrob(lifeExp ~ I(year - offset), data)
+        print(setNames(coef(model), c("intercept", "slope")))
         ggplot(data, aes(x = year, y = lifeExp)) +
                 geom_point() + geom_smooth(method = "lm", se = FALSE) +
                 labs(x="Year",y="Life Expectancy", title=country_input) +
@@ -132,7 +134,6 @@ Answer:
 The first step is to load the data and library. I downloaded the dataset and loaded it manually.
 ```{r}
 load("singer_locations.RData")
-library(ggmap)
 ```
 
 Check the documentation to understand `revgeocode`. According to online information (not in the R documentation), longitude comes first folllowed by latitude.
@@ -151,6 +152,7 @@ location_Google_1 <- singer_locations %>%
         bind_rows()
 
 knitr::kable(location_Google_1)
+jsonedit(location_Google_1)
 ```
 
 The results above looks good but that is only the first 10 records. Since not all of the time we make a research through `revgeocode()` we get a result, I optimized the code below using a combination of `possibly()` and `revgeocode()` to avoid any error. I defined a new function called `poss_rgc` to put them together and called this function in the code.
@@ -169,6 +171,7 @@ location_Google <- singer_locations %>%
         bind_rows()
 
 knitr::kable(location_Google)
+jsonedit(location_Google)
 ```
 
 Step 2: check wether the place in `city` corresponds to the information you retrieved. By observing the result above, there is a column called `locality`, which contains the city name. So I am going to compare `city` in `singer_locations` with `locality` in `location_Google`. However, there are two aspects need to be dealt with.
@@ -235,7 +238,7 @@ __Simplifying data from a list of GitHub users__
 
 8. One last point is that, remember to use `%>%` which will make life eaiser.
 
-__Trump Android Tweets___
+__Trump Android Tweets__
 
 There are a few new things that benefit me a lot.
 
@@ -260,12 +263,17 @@ I selected the several questions above to practise. First, I created a nested da
 # Nest by country
 (gapminder_nest_country <- gapminder %>%
          group_by(country) %>%
-         nest('country', .key = 'data_by_country'))
+         nest())
 
 # Nest by continent
 (gapminder_nest_continent <- gapminder %>%
         group_by(continent) %>%
-        nest('continent', .key = 'data_by_continent'))
+        nest())
+
+# Nest by both country and continent
+(gapminder_both <- gapminder %>%
+        group_by(continent, country) %>%
+        nest())
 ```
 
 For the function of the model fit, I finished this in Part 1 which will not be repeated here again.
