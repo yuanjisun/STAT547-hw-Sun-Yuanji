@@ -61,22 +61,22 @@ Since we have not studied R package, I would like to write a function for the fi
 Level 1: The function is used to establish a __robust regression__ model and calculate the coefficients of life expectancy on year of a selected country. The default offset is 1952, and the function should return the coefficients once the input (country) is provided. The data filteration and other work are finished inside of the funtion.
 ```{r}
 # Write the function
-lifeExp2year <- function(country_input, offset = 1952) {
+lifeExp2year_1 <- function(country_input, offset = 1952) {
         data <- filter(gapminder, country == country_input)
         model <- lmrob(lifeExp ~ I(year - offset), data)
         setNames(coef(model), c("intercept", "slope"))
 }
 
 # Test on several countries
-lifeExp2year("China")
-lifeExp2year("France")
-lifeExp2year("Canada")
+lifeExp2year_1("China")
+lifeExp2year_1("France")
+lifeExp2year_1("Canada")
 ```
 
 Level 2: What if I entered a wrong country name? I want to get a meaningful warning or error message rather than the default one given by RStudio. Here is the Version 2 of the function above.
 ```{r}
 # Write the function
-lifeExp2year <- function(country_input, offset = 1952) {
+lifeExp2year_2 <- function(country_input, offset = 1952) {
         if(!country_input %in% gapminder$country) {
                 warning('Warning: Invalid country name. Please try again. \n')
                 stop
@@ -87,13 +87,13 @@ lifeExp2year <- function(country_input, offset = 1952) {
 }
 
 # Test on wrong country name (Spell in a wrong way to test the warning/error message)
-lifeExp2year("Canadian")
+lifeExp2year_2("Canadian")
 ```
 
 Level 3: It would be great to get an output of the linear regression figure so that I can check whether the regression model is good or not. Using a figure is the easiest way to do so. Here is the Version 3 of the function above. A title is added to each figure using the country name (input).
 ```{r}
 # Write the function
-lifeExp2year <- function(country_input, offset = 1952) {
+lifeExp2year_3 <- function(country_input, offset = 1952) {
         if(!country_input %in% gapminder$country) {
                 stop('Invalid country name. Please try again.')
         }
@@ -107,9 +107,28 @@ lifeExp2year <- function(country_input, offset = 1952) {
 }
 
 # Test on wrong country name (Spell in a wrong way to test the warning/error message)
-lifeExp2year("China")
-lifeExp2year("Canada")
-lifeExp2year("Malaysia")
+lifeExp2year_3("China")
+lifeExp2year_3("Canada")
+lifeExp2year_3("Malaysia")
+```
+
+Level 4: I want to set up several models and compare all coefficients. Version 4 below will allow me to do this.
+```{r}
+# Write the function
+lifeExp2year_4 <- function(country_input, offset = 1952) {
+        if(!country_input %in% gapminder$country) {
+                stop('Invalid country name. Please try again.')
+        }
+        data <- filter(gapminder, country == country_input)
+        model_1 <- lmrob(lifeExp ~ I(year - offset), data)
+        print(setNames(coef(model_1), c("intercept_1", "slope_1")))
+        model_2 <- lm(lifeExp ~ I(year - offset) +I(year^2), data)
+        print(setNames(coef(model_2), c("intercept_2", "slope_2")))
+        model_3 <- lm(lifeExp ~ I(year - offset) +I(year^2) + I(year^3), data)
+        print(setNames(coef(model_3), c("intercept_3", "slope_3")))
+}
+
+lifeExp2year_4("China")
 ```
 
 # Part 2. Work with the `singer` data
@@ -278,7 +297,20 @@ I selected the several questions above to practise. First, I created a nested da
         nest())
 ```
 
-For the function of the model fit, I finished this in Part 1 which will not be repeated here again.
+For the function of the model fit, I modified the `lifeExp2year_1` in the previous question to make sure that it can deal with nested data input. By comparing with the results in Part 1, we can see that the results are the same, meaning this function works properly.
+```{r}
+# Write the function
+lifeExp2year_5 <- function(country_input, offset = 1952) {
+        data <- data.frame(filter(gapminder_both, country == country_input)[[3]])
+        model <- lmrob(lifeExp ~ I(year - offset), data)
+        setNames(coef(model), c("intercept", "slope"))
+}
+
+# Test on several countries
+lifeExp2year_5("China")
+lifeExp2year_5("France")
+lifeExp2year_5("Canada")
+```
 
 # Part 5. Character data
 
