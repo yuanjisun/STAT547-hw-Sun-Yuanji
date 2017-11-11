@@ -4,6 +4,13 @@ author: "Yuanji Sun"
 date: "November 5, 2017"
 output: html_document
 ---
+# Report process
+
+
+
+
+
+
 
 # Preparation: load libraries
 ```{r}
@@ -16,10 +23,6 @@ library(ggplot2)
 library(dplyr)
 library(robustbase)
 ```
-
-# Report process
-
-
 
 # Overview
 Pick (at least) two of the six (numbered) topics below and do one of the exercise prompts listed, or something comparable using your dataset of choice.
