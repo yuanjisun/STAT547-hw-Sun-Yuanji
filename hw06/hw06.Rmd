@@ -263,16 +263,9 @@ Read and work the exercises in the Strings chapter or R for Data Science.
 - Question 6: Describe the equivalents of `?`, `+`, `*` in `{m,n}` form.
 
 
-
-
-
-
-
-
-
-
-
 Answer:
+
+Since I have spent a very long time on this homework and did a lot of extra exercise, I only finish 6 questions here.
 
 Question 1: It is difficult to have even number of characters. However, I used length/2 and round it. Then pass the result to the `str_sub()` and set the start & end point to be length/2. It works.
 ```{r}
@@ -309,22 +302,5 @@ Question 6:
 
 I am not sure about this question. I think `?` should be equal to `{,1}, `+` may be equal to `{1,}. I don't know what is `*` equal to.
 
-Question 7:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[This is the end of Homework 6.]
