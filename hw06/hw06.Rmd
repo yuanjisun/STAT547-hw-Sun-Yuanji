@@ -1,0 +1,278 @@
+---
+title: "Homework 6"
+author: "Yuanji Sun"
+date: "November 5, 2017"
+output: html_document
+---
+
+# Preparation: load libraries
+```{r}
+library(tidyverse)
+library(stringr)
+library(gapminder)
+library(purrr)
+library(repurrrsive)
+library(ggplot2)
+library(dplyr)
+library(robustbase)
+```
+
+# Report process
+
+
+
+# Overview
+Pick (at least) two of the six (numbered) topics below and do one of the exercise prompts listed, or something comparable using your dataset of choice.
+
+# Part 1. Writing functions
+Pick one:
+
+- Write one (or more) functions that do something useful to pieces of the Gapminder or Singer data. It is logical to think about computing on the mini-data frames corresponding to the data for each specific country, location, year, band, album, … This would pair well with the prompt below about working with a nested data frame, as you could apply your function there.
+
+	+ Make it something you can’t easily do with built-in functions. Make it something that’s not trivial to do with the simple `dplyr` verbs. The linear regression function presented here is a good starting point. You could generalize that to do quadratic regression (include a squared term) or use robust regression, using `MASS::rlm()` or `robustbase::lmrob()`.
+
+- If you plan to complete the homework where we build an R package, write a couple of experimental functions exploring some functionality that is useful to you in real life and that might form the basis of your personal package.
+
+Answer: 
+
+Since we have not studied R package, I would like to write a function for the first question.
+
+Level 1: The function is used to establish a __robust regression__ model and calculate the coefficients of life expectancy on year of a selected country. The default offset is 1952, and the function should return the coefficients once the input (country) is provided. The data filteration and other work are finished inside of the funtion.
+```{r}
+# Write the function
+lifeExp2year <- function(country_input, offset = 1952) {
+        data <- filter(gapminder, country == country_input)
+        the_fit <- lmrob(lifeExp ~ I(year - offset), data)
+        setNames(coef(the_fit), c("intercept", "slope"))
+}
+
+# Test on several countries
+lifeExp2year("China")
+lifeExp2year("France")
+lifeExp2year("Canada")
+```
+
+Level 2: What if I entered a wrong country name? I want to get a meaningful warning or error message rather than the default one given by RStudio. Here is the Version 2 of the function above.
+```{r}
+# Write the function
+lifeExp2year <- function(country_input, offset = 1952) {
+        if(!country_input %in% gapminder$country) {
+                warning('Warning: Invalid country name. Please try again. \n')
+                stop
+        }
+        data <- filter(gapminder, country == country_input)
+        the_fit <- lmrob(lifeExp ~ I(year - offset), data)
+        setNames(coef(the_fit), c("intercept", "slope"))
+}
+
+# Test on wrong country name (Spell in a wrong way to test the warning/error message)
+lifeExp2year("Canadian")
+```
+
+Level 3: It would be great to get an output of the linear regression figure so that I can check whether the regression model is good or not. Using a figure is the easiest way to do so. Here is the Version 3 of the function above. A title is added to each figure using the country name (input).
+```{r}
+# Write the function
+lifeExp2year <- function(country_input, offset = 1952) {
+        if(!country_input %in% gapminder$country) {
+                stop('Invalid country name. Please try again.')
+        }
+        data <- filter(gapminder, country == country_input)
+        the_fit <- lmrob(lifeExp ~ I(year - offset), data)
+        print(setNames(coef(the_fit), c("intercept", "slope")))
+        ggplot(data, aes(x = year, y = lifeExp)) +
+                geom_point() + geom_smooth(method = "lm", se = FALSE) +
+                labs(x="Year",y="Life Expectancy", title=country_input) +
+                theme(plot.title = element_text(hjust=0.5))
+}
+
+# Test on wrong country name (Spell in a wrong way to test the warning/error message)
+lifeExp2year("China")
+lifeExp2year("Canada")
+lifeExp2year("Malaysia")
+```
+
+# Part 2. Work with the `singer` data
+The `singer_location` dataframe in the `singer` package contains geographical information stored in two different formats: 1. as a (dirty!) variable named `city`; 2. as a latitude / longitude pair (stored in `latitude`, `longitude` respectively). The function `revgeocode` from the `ggmap` library allows you to retrieve some information for a pair (vector) of longitude, latitude (warning: notice the order in which you need to pass lat and long). Read its manual page.
+
+1. Use `purrr` to map latitude and longitude into human readable information on the band’s origin places. Notice that `revgeocode(... , output = "more")` outputs a dataframe, while `revgeocode(... , output = "address")` returns a string: you have the option of dealing with nested dataframes.
+
+You will need to pay attention to two things:
+	+ Not all of the track have a latitude and longitude: what can we do with the missing information? (filtering, …)
+	+ Not all of the time we make a research through `revgeocode()` we get a result. What can we do to avoid those errors to bite us? (look at `possibly()` in `purrr`…)
+
+2. Try to check wether the place in `city` corresponds to the information you retrieved.
+
+3. If you still have time, you can go visual: give a look to the library `leaflet` and plot some information about the bands. A snippet of code is provided below.
+`singer_locations %>%`
+`  leaflet()  %>%`
+`  addTiles() %>%`
+`  addCircles(popup = ~artist_name)`
+
+Answer:
+
+The first step is to load the data and library. I downloaded the dataset and loaded it manually.
+```{r}
+load("singer_locations.RData")
+library(ggmap)
+```
+
+Check the documentation to understand `revgeocode`. According to online information (not in the R documentation), longitude comes first folllowed by latitude.
+```{r}
+?revgeocode
+```
+
+Step 1: Convert latitude and longitude into human readable information. First, I use filter to remove all `NA` values of latitude and longitude. The output is set as a dataframe by using `output="more"`. Since the final result is quite long, only the first 10 rows are displayed.
+```{r, warning=FALSE, message=FALSE}
+library(magrittr)
+(location_Google_1 <- singer_locations %>%
+        filter(!is.na(latitude) & !is.na(longitude)) %>%
+        # select(longitude, latitude) %>%
+        head(n=10) %$%
+        map2(longitude, latitude, ~ revgeocode(c(.x,.y), output="more")) %>%
+        bind_rows())
+```
+
+The results above looks good but that is only the first 10 records. Since not all of the time we make a research through `revgeocode()` we get a result, I optimized the code below using a combination of `possibly()` and `revgeocode()` to avoid any error. I defined a new function called `poss_rgc` to put them together and called this function in the code.
+
+__(Sorry, the output here is the same as the one above since only the first 10 rows are used due to the daily limits set by Google.)__
+```{r, warning=FALSE, message=FALSE}
+library(magrittr)
+
+poss_rgc <- possibly(~ revgeocode(c(.x,.y), output="more"), "NA_character_", quiet = TRUE)
+
+(location_Google <- singer_locations %>%
+        filter(!is.na(latitude) & !is.na(longitude)) %>%
+        select(longitude, latitude) %>%
+        head(n=10) %$%
+        map2(longitude, latitude, poss_rgc) %>%
+        bind_rows())
+```
+
+Step 2: check wether the place in `city` corresponds to the information you retrieved. By observing the result above, there is a column called `locality`, which contains the city name. So I am going to compare `city` in `singer_locations` with `locality` in `location_Google`. However, there are two aspects need to be dealt with.
+
+1. The city name in `singer_locations` is a combination of city and state, such as "Chicago, IL". Thus, I need to separate them and get the city name only.
+
+2. Since I removed all `NA` in the question above, I also need to remove all rows with `NA` in latitude or longitude. Otherwise, the results cannot be matched.
+
+From the result, we can see that most results are the same. However, if the city name is only available in one of them (another one is `NA`), the result will be `NA`. Also, for the 4th result, the city names are not the same. I am not sure which one is the city name, Pennsylvania or Howard. If Pennsylvania is a state, it should be PA in abbreviation.
+```{r}
+# Part 1: Get city name from singer_locations
+  # Select data by removing NA in latitude and longitude
+city_state <- singer_locations %>%
+        filter(!is.na(latitude) & !is.na(longitude))
+          
+# Seperate the city from state and get the result of city only
+(city_from_singer <- str_split(city_state$city, pattern=", ") %>%
+        head(n=10) %>%
+        map(1))
+        
+# Part 2: Get city name from the result obtained from Google
+(city_from_Google <- location_Google$locality)
+
+# Part 3: Compare both results
+city_from_Google==city_from_singer
+```
+
+Step 3: Visualization (`leaflet` should be installed in advance if it is not done so.) Instead of using default tile, I changed it to the tile provided by Esri. I used the original latitude and longitude in the `singer_locations` since the missing/invalid values are ignored automatically. 
+```{r}
+library(leaflet)
+singer_locations %>%  
+        leaflet() %>%   
+        addProviderTiles(providers$Esri.NatGeoWorldMap) %>%  
+        addMarkers(popup = ~ artist_name)
+```
+
+# Part 3. Work with a list
+Work through and write up a lesson from the purrr tutorial:
+
+- Trump Android Tweets
+- Simplifying data from a list of GitHub users
+
+Answer:
+
+I think this question asks me to write a summary of what I learned from the cases above.
+
+__Simplifying data from a list of GitHub users__
+
+1. `str()` is used to compactly display the structure of an arbitrary R object. There are several widely-used arguments in the funcion, which are shown below.
+- `max.level`: maximal level of nesting which is applied for displaying nested structures, e.g., a list containing sub lists. The default value is `NA`, which will display all nesting levels.
+- `list.len`: maximum number of list elements to display within a level. It is numeric.
+
+2. In order to view the list interactively, `jsonedit(gh_users)` can be used which comes from the package `listviewer`.
+
+3. Subset data from the list can be done using `map(.x, .f, ...)` from `purrr`. `.x` is the list to be viewed and `.f` is the function to be apply to the list. There are two ways to set `.f`, (1) in the form of `function(x) x[["TEXT"]]`, and (2) `function(x) x[[i]]`.
+
+4. It is a good idea to use __type-specific map__ to get the output in the form of atomic vector, such as `map_chr()` and `map_dbl()`.
+
+5. If multiple values need to be extracted, we can combine variable names using `c()`. A good example is `gh_users[[3]][c("name", "login", "id", "location")]`. It looks wired to use `[` but it works and there is no need to add `]`. Here is an example `map(gh_users, `[`, c("login", "name", "id", "location"))`.
+
+6. It is also possible to use vector input to extract shortcuts. The key point is that the j-th element addresses the j-th level of the hierarchy. For instance, `map_chr(gh_repos, c(1, 3))` will return the full name (element 3) of the first repository listed for each user.
+
+7. If we want to get a list inside the dataframe, `tibble::enframe()` can be used. The basic sytax is `enframe(x, name = "name", value = "value")`, in which `name` and `value` are names of the columns that store the names and values.
+
+8. One last point is that, remember to use `%>%` which will make life eaiser.
+
+__Trump Android Tweets___
+
+There are a few new things that benefit me a lot.
+
+1. `gregexpr()`: the purpose is pattern matching and replacement. There are many usages but the most common syntax is `gregexpr(pattern, x)`. `x` is a character vector where matches are sought, or an object which can be coerced by `as.character` to a character vector. `pattern` is the character string containing a regular expression.
+
+2. `substring()`: it is used to extract or replace substrings in a character vector. The basic syntax is `substr(x, start, stop)` in which `x` is a character vector, `start` and `stop` are the first and last elements to be replaced.
+
+3. There are three types of functions, __pre-defined custom function__ (e.g. `ml <- function(x) attr(x, which = "match.length")`), __anonymous function__ (e.g. `map(matches, ~ attr(.x, which = "match.length"))`) and ___pre-existing function___ (e.g. `match_length <- map(matches, attr, which = "match.length")`).
+
+
+# Part 4. Work with a nested data frame
+
+Create a nested data frame and map a function over the list column holding the nested data. Use list extraction or other functions to pull interesting information out of these results and work your way back to a simple data frame you can visualize and explore.
+
+- Nest the data by country (and continent).
+- Fit a model of life expectancy against year. Possibly quadratic, possibly robust (see above prompt re: function writing).
+
+Answer:
+
+I selected the several questions above to practise. First, I created a nested dataframe by `country` and `continent` seperately.
+```{r}
+# Nest by country
+gapminder_nest_country <- nest(gapminder, 'country', .key = 'nest_country')
+
+# Nest by continent
+gapminder_nest_continent <- nest(gapminder, 'continent', .key = 'nest_continent')
+```
+
+For the function of the model fit, I finished this in Part 1 which will not be repeated here again.
+
+# Part 5. Character data
+
+Read and work the exercises in the Strings chapter or R for Data Science.
+
+- Question 1: Use `str_length()` and `str_sub()` to extract the middle character from a string. What will you do if the string has an even number of characters?
+
+- Question 2: What does `str_wrap()` do? When might you want to use it?
+
+- Question 3: How would you match the sequence `"'\`?
+
+
+Answer:
+
+Question 1: It is difficult to have even number of characters. However, I used length/2 and round it. Then pass the result to the `str_sub()` and set the start & end point to be length/2. It works.
+```{r}
+string_1 <- c("apple", "banana", "dog", "cate")
+length_1 <- str_length(string_1)
+middle <- ceiling(length_1 / 2)
+str_sub(string_1, middle, middle)
+```
+
+Question 2: 
+
+`str_wrap()` wraps strings into nicely formatted paragraphs. It is helpful when dealing with a long text string. The syntax is `str_wrap(string, width = 80, indent = 0, exdent = 0)`.
+
+Question 3:
+
+
+
+
+
+
+
