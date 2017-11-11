@@ -143,12 +143,14 @@ Check the documentation to understand `revgeocode`. According to online informat
 Step 1: Convert latitude and longitude into human readable information. First, I use filter to remove all `NA` values of latitude and longitude. Since the final result is quite long, only the first 10 rows are displayed.
 ```{r, warning=FALSE, message=FALSE}
 library(magrittr)
-(location_Google_1 <- singer_locations %>%
+location_Google_1 <- singer_locations %>%
         filter(!is.na(latitude) & !is.na(longitude)) %>%
         # select(longitude, latitude) %>%
         head(n=10) %$%
         map2(longitude, latitude, ~ revgeocode(c(.x,.y), output="more")) %>%
-        bind_rows())
+        bind_rows()
+
+knitr::kable(location_Google_1)
 ```
 
 The results above looks good but that is only the first 10 records. Since not all of the time we make a research through `revgeocode()` we get a result, I optimized the code below using a combination of `possibly()` and `revgeocode()` to avoid any error. I defined a new function called `poss_rgc` to put them together and called this function in the code.
@@ -159,12 +161,14 @@ library(magrittr)
 
 poss_rgc <- possibly(~ revgeocode(c(.x,.y), output="more"), "NA_character_", quiet = TRUE)
 
-(location_Google <- singer_locations %>%
+location_Google <- singer_locations %>%
         filter(!is.na(latitude) & !is.na(longitude)) %>%
         select(longitude, latitude) %>%
         head(n=10) %$%
         map2(longitude, latitude, poss_rgc) %>%
-        bind_rows())
+        bind_rows()
+
+knitr::kable(location_Google)
 ```
 
 Step 2: check wether the place in `city` corresponds to the information you retrieved. By observing the result above, there is a column called `locality`, which contains the city name. So I am going to compare `city` in `singer_locations` with `locality` in `location_Google`. However, there are two aspects need to be dealt with.
