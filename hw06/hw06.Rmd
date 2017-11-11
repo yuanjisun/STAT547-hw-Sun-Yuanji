@@ -5,11 +5,24 @@ date: "November 5, 2017"
 output: html_document
 ---
 # Report process
+1. Problems I ran into
 
+    - I didn't realize that Google sets limits to the database usage at the very beginning. My code failed because of this reason. Now the problem is fixed by only sending the first 10 rows to `revgeocode()`.
+    - It is quite difficult to understand when I should use `~` to call a function inside of another function. I also spent a long time figuring out when I should add `.`, such as `revgeocode(c(.x,.y))` vs `revgeocode(c(x,y))`.
+    - I ran into difficulty in telling the difference between `%>%` and `%$%`. This is solved by Googling.
+    - It is quite difficult to subset a pattern from a string. I thought it was easy but I was wrong. The best way to solve this problem is to try by myself and Google it when having difficulty.
+    - Another difficult issue is to understand the error message in RStudio. Sometimes it doesn't make any sense. If I expand the message, I find that I cannot understand them at all. So I fix bugs in a slow way.
 
+2. Useful rescources
 
+    - Lecture notes & course website
+    - Website: https://stackoverflow.com
+    - Google
+    - Book: R for Data Science
 
+3. Conclusion
 
+This homework is not easy. Although many problems occurred, I learned a lot from debudding. By doing extra exercise, I am more clear about the skills discussed in lectures.
 
 
 # Preparation: load libraries
@@ -26,6 +39,8 @@ library(robustbase)
 
 # Overview
 Pick (at least) two of the six (numbered) topics below and do one of the exercise prompts listed, or something comparable using your dataset of choice.
+
+__I selected 5 questions to practise.__
 
 # Part 1. Writing functions
 Pick one:
@@ -124,7 +139,7 @@ Check the documentation to understand `revgeocode`. According to online informat
 ?revgeocode
 ```
 
-Step 1: Convert latitude and longitude into human readable information. First, I use filter to remove all `NA` values of latitude and longitude. The output is set as a dataframe by using `output="more"`. Since the final result is quite long, only the first 10 rows are displayed.
+Step 1: Convert latitude and longitude into human readable information. First, I use filter to remove all `NA` values of latitude and longitude. Since the final result is quite long, only the first 10 rows are displayed.
 ```{r, warning=FALSE, message=FALSE}
 library(magrittr)
 (location_Google_1 <- singer_locations %>%
@@ -238,10 +253,10 @@ Answer:
 I selected the several questions above to practise. First, I created a nested dataframe by `country` and `continent` seperately.
 ```{r}
 # Nest by country
-gapminder_nest_country <- nest(gapminder, 'country', .key = 'nest_country')
+(gapminder_nest_country <- nest(gapminder, 'country', .key = 'nest_country'))
 
 # Nest by continent
-gapminder_nest_continent <- nest(gapminder, 'continent', .key = 'nest_continent')
+(gapminder_nest_continent <- nest(gapminder, 'continent', .key = 'nest_continent'))
 ```
 
 For the function of the model fit, I finished this in Part 1 which will not be repeated here again.
