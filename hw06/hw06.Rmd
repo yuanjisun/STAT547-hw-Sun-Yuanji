@@ -254,7 +254,22 @@ Read and work the exercises in the Strings chapter or R for Data Science.
 
 - Question 2: What does `str_wrap()` do? When might you want to use it?
 
-- Question 3: How would you match the sequence `"'\`?
+- Question 3: What patterns will the regular expression `\..\..\..` match? How would you represent it as a string?
+
+- Question 4: How would you match the literal string `"$^$"`?
+
+- Question 5: Create a regular expression that will match telephone numbers as commonly written in your country.
+
+- Question 6: Describe the equivalents of `?`, `+`, `*` in `{m,n}` form.
+
+
+
+
+
+
+
+
+
 
 
 Answer:
@@ -272,6 +287,40 @@ Question 2:
 `str_wrap()` wraps strings into nicely formatted paragraphs. It is helpful when dealing with a long text string. The syntax is `str_wrap(string, width = 80, indent = 0, exdent = 0)`.
 
 Question 3:
+
+I think the pattern matched here will be any characters with a dot at the beginning. The pattern (string) will be repeated 3 times.
+
+Question 4:
+
+I can match the string `"$^$"` using the code below.
+```{r}
+str_view(c("$^$"), "^\\$\\^\\$$")
+```
+
+Question 5:
+
+Here is an example to match telephone numbers in the format used in Canada.
+```{r}
+x <- c("604-888-1234")
+str_view(x, "\\n\\n\\n-\\n\\n\\n-\\n\\n\\n\\n")
+```
+
+Question 6:
+
+I am not sure about this question. I think `?` should be equal to `{,1}, `+` may be equal to `{1,}. I don't know what is `*` equal to.
+
+Question 7:
+
+
+
+
+
+
+
+
+
+
+
 
 
 
