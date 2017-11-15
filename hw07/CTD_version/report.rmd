@@ -1,0 +1,30 @@
+---
+title: "Homework 07 (CTD Version)"
+author: "Yuanji Sun"
+date: "November 14, 2017"
+output: github_document
+---
+In this homework, I created a pipeline to automatically analyze the CTD data, which is unique in Oceanography. CTD measures key factors of seawater, including temperature, salinity, pressure.
+
+__Please note: the package called "oce" must be installed in advance.__
+
+First, let's have a look at the CTD data. What does it look like?
+```{r}
+load("ctd_data.RData")
+ctd_data
+```
+
+How about getting the summary of the data?
+```{r}
+summary(ctd_data)
+```
+
+Second, let's have a look at the depth profile of key parameters. In Oceanography, pressure can be used as depth (m). This information is directly obtained and plotted from CTD data. We can see that the temperature and salinity increase with the increase of depth (pressure).
+
+![*Fig. 1* Summary of CTD Data](Summary.jpg)
+
+![*Fig. 2* The Scan View of Pressure](Pressure_Scan.jpg)
+
+Third, how about doing some calculation and plot based on my need? I can calculate the Sigma of seawater and obrain the following figure. Sigma can be taken as the density of seawater here. We can see that the density increases with the depth.
+
+![*Fig. 3* Density of the Seawater](Density_Pressure.jpg)
