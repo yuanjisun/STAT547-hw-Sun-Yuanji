@@ -1,6 +1,6 @@
 # README: Homework 07 (CTD Version)
 
-This is the folder for STAT 547M Homework 7 (CTD version), which includes the following key parts.
+This is the folder for STAT 547M Homework 7 (CTD version), which includes the following key parts. All R scripts/RMD files are connected with Makefile and will be run in the order below.
 
 - Makefile
 - step_1.r

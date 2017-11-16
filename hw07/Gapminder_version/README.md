@@ -1,6 +1,6 @@
 # README: Homework 07 (Gapminder Version)
 
-This is the folder for STAT 547M Homework 7 (Gapminder version), which includes the following key parts.
+This is the folder for STAT 547M Homework 7 (Gapminder version), which includes the following key parts. All R scripts/RMD files are connected with Makefile and will be run in the order below.
 
 - Makefile
 - exploratory_analyses.r
