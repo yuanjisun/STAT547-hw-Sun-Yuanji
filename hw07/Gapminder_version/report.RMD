@@ -33,8 +33,9 @@ I also reordered the continent based on the life expectancy and saved the result
 # Perform statistical analyses
 In this section, I first read the sorted data from .tsv file from the previous part. The reordered continent is still in force. I made a linear model and used `broom::tidy()` to export the coefficients to a .tsv file. Let's have a look at it.
 ```{r}
-read.table(file="model_result.tsv", sep="\t", skip = 1,
+output <- read.table(file="model_result.tsv", sep="\t", skip = 1,
 		   col.names=c("Continent", "Country", "Term","Estimate", "Std.Error", "Statistic", "P.Value"))
+knitr::kable(output)
 ```
 
 Based on the results above, I ordered countries in each continent __from the best to worst__ according to the intercept value (lowest to largest) and saved the results in seperate .tsv file. This is the so-called best/worst countries based on my criteria. Let's have a look at the results.

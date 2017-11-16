@@ -13,4 +13,4 @@ RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
 BuildType: Makefile
-MakefilePath: hw07/CTD_version
+MakefilePath: hw07/Gapminder_version
