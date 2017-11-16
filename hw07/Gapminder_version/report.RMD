@@ -1,0 +1,80 @@
+---
+title: "Homework 7 (Gapminder Version)"
+author: "Yuanji Sun"
+date: "November 14, 2017"
+output: github_document
+---
+
+# Report process
+
+
+
+# Perform exploratory analyses
+In this section, I plotted two figures. Figure 1 shows the min/max GDP/cap of each continent in different years. Figure 2 shows the distribution of GDP/cap over years of each continent.
+
+![*Fig. 1* Max/Min GDP/cap of each Continent in each Year](Min_Max_GDP_per_Capita_year.png)
+
+![*Fig. 2* Distribution of GDP/cap over Years of each Continent](GDP_per_Capita_Continent.png)
+
+I also reordered the continent based on the life expectancy and saved the results to `exploratory_analyses.tsv`. Based on this sorted and reordered data, I make another plot which shows the average life expectancy of each continent. (You can see that the continent order is reordered already).
+
+![*Fig. 3* Distribution of GDP/cap over Years of each Continent](mean_lifeExp_continent.png)
+
+
+# Perform statistical analyses
+In this section, I first read the sorted data from .tsv file from the previous part. The reordered continent is still in force. I made a linear model and used `broom::tidy()` to export the coefficients to a .tsv file. Let's have a look at it.
+```{r}
+read.table(file="model_result.tsv", sep="\t", skip = 1,
+		   col.names=c("Continent", "Country", "Term","Estimate", "Std.Error", "Statistic", "P.Value"))
+```
+
+Based on the results above, I ordered countries in each continent __from the best to worst__ according to the intercept value (lowest to largest) and saved the results in seperate .tsv file. This is the so-called best/worst countries based on my criteria. Let's have a look at the results.
+
+Africa (from the worst to the best)
+```{r}
+read.table(file="Africa.tsv", sep="\t", skip = 1, col.names=c("Country", "Intercept Estimate"))
+```
+
+Americas (from the worst to the best)
+```{r}
+read.table(file="Americas.tsv", sep="\t", skip = 1, col.names=c("Country", "Intercept Estimate"))
+```
+
+Asia (from the worst to the best)
+```{r}
+read.table(file="Asia.tsv", sep="\t", skip = 1, col.names=c("Country", "Intercept Estimate"))
+```
+
+Europe (from the worst to the best)
+```{r}
+read.table(file="Europe.tsv", sep="\t", skip = 1, col.names=c("Country", "Intercept Estimate"))
+```
+
+Oceania (from the worst to the best)
+```{r}
+read.table(file="Oceania.tsv", sep="\t", skip = 1, col.names=c("Country", "Intercept Estimate"))
+```
+
+# Generate figures
+In this section, I created a figure for each continent, and wrote one file per continent, with an informative name. The figure gives scatterplots of life expectancy vs. year, faceting on country, fitted line overlaid. Here are the figures.
+
+![*Fig. 4* Life Expectancy over Years with Linear Fitting in Africa](Africa.png)
+
+
+![*Fig. 5* Life Expectancy over Years with Linear Fitting in Asia](Asia.png)
+
+
+![*Fig. 6* Life Expectancy over Years with Linear Fitting in Americas](Americas.png)
+
+
+![*Fig. 7* Life Expectancy over Years with Linear Fitting in Europe](Europe.png)
+
+
+![*Fig. 8* Life Expectancy over Years with Linear Fitting in Oceania](Oceania.png)
+
+
+# Automate the pipeline
+Since I am using Makefile, there is no need to use `source()`. I made this report.RMD file to put everything together and generate the final report. To update/run all files automatially, simply choose "Build All" to run the Makefile.
+
+[This is the end of Homework 7 (Gapminder Version).]
+
