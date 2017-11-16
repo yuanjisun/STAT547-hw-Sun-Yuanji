@@ -8,4 +8,4 @@ This is the folder for STAT 547M Homework 7, which includes two versions, Gapmin
 
 There is a README in each sub-folder which contains more information/instructions.
 
-Citation: all codes are make by myself in this homework or copied from my previous homework.
+
