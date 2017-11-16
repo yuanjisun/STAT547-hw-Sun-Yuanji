@@ -3,6 +3,22 @@ Homework 07 (CTD Version)
 Yuanji Sun
 November 14, 2017
 
+Report process
+==============
+
+I learnt a lot from this exercise and am clear about how Makefile works. Below are the problems I ran into.
+
+1.  `rm` does not work in Windows. Instead, I should use `del` to remove/clean files.
+2.  It is a good idea to add the files into remove list immediately after finishing the R script. Otherwise, it takes a longer time to find out which one needs to be cleaned.
+3.  It is necessary to run the R script/RMD file before finalizing the Makefile. Otherwise, it is really difficult to debug.
+4.  If many files of the same type will be produced, I can use `%` to represent the file name. For example, I used `%.png` in Makefile to represent all .png files generated in that step.
+5.  It is good that if you render the MD file, a HTML file will also be generated automatically.
+
+The most useful resources I used is the lecture notes (example). Following it step by step is a good way to learn.
+
+CTD Report
+==========
+
 In this homework, I created a pipeline to automatically analyze the CTD data, which is unique in Oceanography. CTD measures key factors of seawater, including temperature, salinity, pressure.
 
 **Please note: the package called "oce" must be installed in advance.**
@@ -65,8 +81,8 @@ summary(ctd_data)
     ##     nbin                                    2      4       8      12   nbin        
     ## 
     ## * Processing Log
-    ##     - 2017-11-14 22:12:37 UTC: `create 'ctd' object`
-    ##     - 2017-11-14 22:12:38 UTC: `read.ctd.sbe(file = file, processingLog = processingLog)`
+    ##     - 2017-11-15 21:50:37 UTC: `create 'ctd' object`
+    ##     - 2017-11-15 21:50:38 UTC: `read.ctd.sbe(file = file, processingLog = processingLog)`
 
     ##                                             Min.     Mean      Max.    
     ##     scan                                    "230"    "256.5"   "279"   

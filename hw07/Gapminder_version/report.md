@@ -6,6 +6,17 @@ November 14, 2017
 Report process
 ==============
 
+I learnt a lot from this exercise and am clear about how Makefile works. Below are the problems I ran into.
+
+1.  `rm` does not work in Windows. Instead, I should use `del` to remove/clean files.
+2.  It is a good idea to add the files into remove list immediately after finishing the R script. Otherwise, it takes a longer time to find out which one needs to be cleaned.
+3.  It is necessary to run the R script/RMD file before finalizing the Makefile. Otherwise, it is really difficult to debug.
+4.  I tried to make the last 5 figures in this report larger but I did not find a good way. If I specify the image size, I cannot keep the width/height ratio. I tried to use the package `ggplus` but it is not well developed. So I did not change the image size here.
+5.  If many files of the same type will be produced, I can use `%` to represent the file name. For example, I used `%.png` in Makefile to represent all .png files generated in that step.
+6.  It is good that if you render the MD file, a HTML file will also be generated automatically.
+
+The most useful resources I used is the lecture notes (example). Following it step by step is a good way to learn.
+
 Perform exploratory analyses
 ============================
 

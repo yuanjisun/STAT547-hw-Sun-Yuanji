@@ -28,6 +28,17 @@ body {
 <h1 id="homework-07-ctd-version">Homework 07 (CTD Version)</h1>
 <p>Yuanji Sun<br />
 November 14, 2017</p>
+<h1 id="report-process">Report process</h1>
+<p>I learnt a lot from this exercise and am clear about how Makefile works. Below are the problems I ran into.</p>
+<ol>
+<li><code>rm</code> does not work in Windows. Instead, I should use <code>del</code> to remove/clean files.</li>
+<li>It is a good idea to add the files into remove list immediately after finishing the R script. Otherwise, it takes a longer time to find out which one needs to be cleaned.</li>
+<li>It is necessary to run the R script/RMD file before finalizing the Makefile. Otherwise, it is really difficult to debug.</li>
+<li>If many files of the same type will be produced, I can use <code>%</code> to represent the file name. For example, I used <code>%.png</code> in Makefile to represent all .png files generated in that step.</li>
+<li>It is good that if you render the MD file, a HTML file will also be generated automatically.</li>
+</ol>
+<p>The most useful resources I used is the lecture notes (example). Following it step by step is a good way to learn.</p>
+<h1 id="ctd-report">CTD Report</h1>
 <p>In this homework, I created a pipeline to automatically analyze the CTD data, which is unique in Oceanography. CTD measures key factors of seawater, including temperature, salinity, pressure.</p>
 <p><strong>Please note: the package called &quot;oce&quot; must be installed in advance.</strong></p>
 <p>First, let's have a look at the CTD data. What does it look like?</p>
@@ -79,8 +90,8 @@ ctd_data</code></pre></div>
 ##     nbin                                    2      4       8      12   nbin        
 ## 
 ## * Processing Log
-##     - 2017-11-14 22:12:37 UTC: `create 'ctd' object`
-##     - 2017-11-14 22:12:38 UTC: `read.ctd.sbe(file = file, processingLog = processingLog)`
+##     - 2017-11-15 21:50:37 UTC: `create 'ctd' object`
+##     - 2017-11-15 21:50:38 UTC: `read.ctd.sbe(file = file, processingLog = processingLog)`
 
 ##                                             Min.     Mean      Max.    
 ##     scan                                    &quot;230&quot;    &quot;256.5&quot;   &quot;279&quot;   
