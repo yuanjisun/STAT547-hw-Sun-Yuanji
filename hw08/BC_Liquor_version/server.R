@@ -9,13 +9,16 @@ library(dplyr)
 library(DT)
 library(ggplot2)
 library(shinyjs)
+library(shinydashboard)
 
 server <- function(input, output) {
 	bcl_data <- read_csv("Data/bcl-data.csv")
 	
 	Filtered_bcl <- reactive (bcl_data %>%
-		filter(Price>=input$priceIn[1], Price<=input$priceIn[2], Type==input$typeIn))
-	
+		filter(Price>=input$priceIn[1], Price<=input$priceIn[2], Type %in% input$typeIn))
+	        # if (is.null(nrow())) {
+	        #         return(NULL)}
+	                
 	output$Hist_AlcCont <- renderPlot({
 		Filtered_bcl() %>%
 			ggplot() +
@@ -30,8 +33,6 @@ server <- function(input, output) {
 	output$downloadOut <- downloadHandler("Results.csv",content = function(file) {
 	        write.csv(Filtered_bcl_download,"Results")})
 	
-	
-	
-	
+	# output$rownuberOut <- paste("We found", nrow(Filtered_bcl), "options for you.")
 	
 }

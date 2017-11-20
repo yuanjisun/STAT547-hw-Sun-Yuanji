@@ -16,6 +16,7 @@ library(dplyr)
 library(DT)
 library(ggplot2)
 library(shinyjs)
+library(shinydashboard)
 
 # Define UI for application that draws a histogram
 # (In a seperate files.)
