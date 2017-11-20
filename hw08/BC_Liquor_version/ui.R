@@ -7,8 +7,9 @@ ui <- dashboardPage(
         dashboardSidebar("Data Selection Criteria",
                 width = 400,
                 img(src = "BC_liquor.jpg", width = "100%"),
-                sliderInput("priceIn","Price of booze", min=0, max=300, value=c(10,20), pre = "CAD"),
+                sliderInput("priceIn","Price of booze", min=0, max=300, value=c(0,300), pre = "CAD"),
                 checkboxGroupInput("typeIn","What type of booze?", choices = c("BEER","SPIRITS","WINE","REFRESHMENT"), selected = c("BEER","SPIRITS","WINE","REFRESHMENT")),
+                conditionalPanel("input.typeIn == 'WINE'",sliderInput("sweetnessIn","Choose the sweetness:", min=0, max=10, value=c(0,10))),
                 colourInput("colorIn", "what is your preferred color?","red"),
                 checkboxInput("sortpriceIn", "Sort by price?",value = FALSE)),
 	

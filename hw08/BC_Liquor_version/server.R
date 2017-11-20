@@ -17,13 +17,17 @@ server <- function(input, output) {
 	Filtered_bcl <- reactive (bcl_data %>%
 		filter(Price>=input$priceIn[1], Price<=input$priceIn[2], Type %in% input$typeIn))
 	        # if (is.null(nrow())) {
-	        #         return(NULL)}
+	        #         return(NULL)} %>%
+	        # if (input$sweetnessIn){
+	        #        filter(Sweetness>=input$sweetnessIn[1],Sweetness<=input$sweetnessIn[2])
+	        # }
 	                
 	output$Hist_AlcCont <- renderPlot({
 		Filtered_bcl() %>%
 			ggplot() +
 			aes(x = Alcohol_Content) +
-			geom_histogram(fill=input$colorIn)
+			geom_histogram(fill=input$colorIn) +
+	                labs(x="Alcohol content",y="Counts", title="Filtered Result")
 	})
 	
 	output$table_result <- renderDataTable({
@@ -31,7 +35,7 @@ server <- function(input, output) {
 	})
 	
 	output$downloadOut <- downloadHandler("Results.csv",content = function(file) {
-	        write.csv(Filtered_bcl_download,"Results")})
+	        write.csv(file="Filtered_bcl_download","Results")})
 	
 	# output$rownuberOut <- paste("We found", nrow(Filtered_bcl), "options for you.")
 	
