@@ -1,0 +1,13 @@
+name: STAT_547M_cm108
+title: STAT_547M_cm108
+username:
+account: yuanjisun
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 236357
+bundleId: 1079471
+url: https://yuanjisun.shinyapps.io/STAT_547M_cm108/
+when: 1510858151.06056
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: download_image.R
