@@ -14,7 +14,7 @@ server <- function(input, output) {
 	bcl_data <- read_csv("Data/bcl-data.csv")
 	
 	Filtered_bcl <- reactive (
-        if (input$typeIn == "WINE"){
+        if (identical (input$typeIn, "WINE")){
                 bcl_data %>%
                         filter(Price>=input$priceIn[1], Price<=input$priceIn[2], Type %in% input$typeIn) %>%
                         filter(Sweetness>=input$sweetnessIn[1],Sweetness<=input$sweetnessIn[2])
@@ -24,8 +24,8 @@ server <- function(input, output) {
         })
 	                
 	output$Hist_AlcCont <- renderPlot({
-	        if(nrow(Filtered_bcl()) == 0) {
-	                return(NULL)
+	        if(nrow(Filtered_bcl()) == 0 ) {
+	                ggplot()
 	        }
 	        else{
                         Filtered_bcl() %>%
