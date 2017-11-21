@@ -18,13 +18,19 @@ server <- function(input, output) {
         output$figure_1 <- renderPlot({
                 filtered_data() %>%
                         ggplot() +
-                        aes_string(x = input$typeIn, y="Depth") +
+                        aes_string(x = input$typeIn, y="-Depth") +
                         geom_point(colour=input$colorIn) +
                         labs(y="Depth (m)", title="Depth profile")
         })
         
         output$table <- renderDataTable({
                 filtered_data()
-        })        
-
+        })
+        
+        output$download_data_Out <- downloadHandler(
+        	filename = "Results.csv",
+        	content = function(file) {
+        		write.csv(filtered_data(), file)
+        	}
+        )
 }

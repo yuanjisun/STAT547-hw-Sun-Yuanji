@@ -7,15 +7,6 @@
 #    http://shiny.rstudio.com/
 #
 
-library(shiny)
-library(readr)
-library(tidyverse)
-library(readr)
-library(dplyr)
-library(DT)
-library(ggplot2)
-library(shinyjs)
-library(readxl)
 
 # Run the application 
 shinyApp(ui = ui, server = server)

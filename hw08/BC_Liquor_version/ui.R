@@ -22,7 +22,7 @@ ui <- dashboardPage(
                 br(), br(),
                 textOutput("rownuberOut"),
                 br(), br(),
-                downloadButton("downloadOut", "Download result to .csv"),
+                downloadButton("downloadOut", "Download result to file"),
                 br(), br(),
                 dataTableOutput("table_result"),
                 br(), br(),
