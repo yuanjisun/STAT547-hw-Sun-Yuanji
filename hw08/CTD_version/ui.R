@@ -25,6 +25,6 @@ ui <- dashboardPage(
 		br(),br(),
 		downloadButton("download_data_Out", "Download data to file"),
 		br(),br(),
-		dataTableOutput("table"))
+		dataTableOutput("table")),
 )
 
