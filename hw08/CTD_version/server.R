@@ -24,7 +24,14 @@ server <- function(input, output) {
         })
         
         output$table <- renderDataTable({
-                filtered_data()
+        	if (input$sortDepthIn){
+        		filtered_data() %>%
+        			arrange(-Depth)
+        	}
+        	else {
+        		filtered_data()
+        	}
+                
         })
         
         output$download_data_Out <- downloadHandler(
