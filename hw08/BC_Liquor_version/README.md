@@ -7,9 +7,9 @@ To view the final report, choose the file `report.md` or `report.html`.
 
 [Link to website](https://yuanjisun.shinyapps.io/BC_Liquor_app/)
 
-[Link to ui.R](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/blob/master/hw08/BC_Liquor_version/ui.R)
+[Link to ui.R](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/blob/master/hw08/BC_Liquor_version/Shiny_app/ui.R)
 
-[Link to server.R](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/blob/master/hw08/BC_Liquor_version/server.R)
+[Link to server.R](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/blob/master/hw08/BC_Liquor_version/Shiny_app/server.R)
 
 __Features added to the app__
 1. Add an option to sort the results table by price.

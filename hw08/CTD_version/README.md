@@ -18,9 +18,9 @@ Since CTD data is quite difficult to process (the first step is how to read the 
 
 [Link to website](https://yuanjisun.shinyapps.io/CTD_app/)
 
-[Link to ui.R](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/blob/master/hw08/CTD_version/ui.R)
+[Link to ui.R](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/blob/master/hw08/CTD_version/Shiny_app/ui.R)
 
-[Link to server.R](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/blob/master/hw08/CTD_version/server.R)
+[Link to server.R](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/blob/master/hw08/CTD_version/Shiny_app/server.R)
 
 __Features added to the app__
 
