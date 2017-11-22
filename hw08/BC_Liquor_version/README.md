@@ -74,4 +74,6 @@ __Report process__
 
 4. It is very important to put `()` after reactive dataframe. I ran into several errors because of missing `()`.
 
-5. The most useful resource is Google. The shiny documentation is also helpful when choosing the visualization options. Dean Attali's Shiny Server gives some idea how to optimize the app.
+5. It is important to keep in mind that ui.R and serrver.R do not share packages. If you used a package in UI, then load it in UI. It is the same for Server. If you are not sure (or too many packages are loaded), just load them in both R scripts.
+
+6. The most useful resource is Google. The shiny documentation is also helpful when choosing the visualization options. Dean Attali's Shiny Server gives some idea how to optimize the app.
