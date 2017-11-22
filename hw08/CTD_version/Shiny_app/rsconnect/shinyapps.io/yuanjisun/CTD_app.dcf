@@ -1,0 +1,12 @@
+name: CTD_app
+title: CTD_app
+username:
+account: yuanjisun
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 238770
+bundleId: 1089732
+url: https://yuanjisun.shinyapps.io/CTD_app/
+when: 1511333347.93763
+asMultiple: FALSE
+asStatic: FALSE

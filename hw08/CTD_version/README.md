@@ -4,7 +4,7 @@ This is the folder for STAT 547M Homework 8 (CTD Version). This is just a DEMO V
 
 Since CTD data is quite difficult to process (the first step is how to read the file by human). My goal is to establish an official CTD data analysis website on the eoas.ubc.ca server, which can:
 
-(1) allow user upload .cnv file to the web server (upgrade in the future version)
+(1) allow user upload .cnv file to the web server (upgrade in the future version. Use processed .xlsx file instead in this version)
 
 (2) generate all figures interactively and allow users to download them in high resolution (partially realized in current version)
 
