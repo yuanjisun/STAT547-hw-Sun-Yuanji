@@ -2,7 +2,7 @@
 
 This is the folder for STAT 547M Homework 9. In this homework, I build a package called `marine`, which is used to help marine science researchers analyze CTD data quickly.
 
-[Link to package](https://yuanjisun.shinyapps.io/CTD_app/)
+[Link to package](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/tree/master/hw09/marine)
 
 __Report process__
 
