@@ -1,0 +1,45 @@
+---
+title: "marine"
+author: "Yuanji SSun"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+__Note__: This is the first release of the package. More functions will be added in the future.
+
+
+Load the library
+```{r}
+library(marine)
+```
+
+Step 1. import CTD data by calling `raw_data()`.
+```{r}
+# data <- raw_data("sample_CTD.cnv")
+```
+
+Step 2. if you want to get the compensation depth, simply call `compensation_depth()`. The input is the raw data getting from Step 1.
+```{r}
+compensation_depth(data)
+```
+
+Step 3. To get U-238 activity in the seawater and a depth profile figure, simply call `U_238()`. The input is the raw data getting from Step 1. The first argument is the raw data. The second input is used to decide which method should be used. The default is 1 (Owen's), but you can choose 2 (Pates'). The last input is `TRUE/FALSE`, deciding whether you want an output of the depth profile figure. The default is `TRUE`.
+```{r}
+# Owen's method plus figure
+result <- U_238(data, 1)
+
+result[1]
+result[2]
+
+# Pates' method without figure
+U_238(data, 2, FALSE)
+```
+
+Step 4. To get the GPS information of the sampling site, simply call `gps()`. The input is the raw data getting from Step 1. It will return a list containing latitute and longitude.
+```{r}
+gps(data)
+```
