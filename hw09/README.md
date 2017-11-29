@@ -15,6 +15,7 @@ __Report process__
 5. It is very important to write the README and help file in time. Otherwise I will confuze about what I did.
 6. I successfully editted the README, package documentation and vignette. Detailed instructions can be found in README and vignette.
 7. Since .cnv file is very unique, I provided two sample files in the package folder. Please download them and test the package.
+8. There is no error and all checks are passed.
 
 Useful resource:
 
