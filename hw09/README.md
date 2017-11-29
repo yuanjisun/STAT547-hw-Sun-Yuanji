@@ -15,3 +15,10 @@ __Report process__
 5. It is very important to write the README and help file in time. Otherwise I will confuze about what I did.
 6. I successfully editted the README, package documentation and vignette. Detailed instructions can be found in README and vignette.
 7. Since .cnv file is very unique, I provided two sample files in the package folder. Please download them and test the package.
+
+Useful resource:
+
+1. Google
+2. Lecture notes
+
+Acknowlegement: The first step (read .cnv file and form the data structure) is based on a function in the package `oce`. Thanks the author for providing me with a great start.
