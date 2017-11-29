@@ -12,6 +12,5 @@ Homework 07 is stored in the folder hw07. [Here is the link to that folder.](htt
 Homework 08 is stored in the folder hw08. [Here is the link to that folder.](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/tree/master/hw08)
 
 ## Homework 09: Building your own R package
-Homework 09 is stored in the folder hw09. [Here is the link to that folder.](https://github.com/yuanjisun/marine)
-
+Homework 09 is stored in the folder hw09. [Here is the link to that folder.](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/tree/master/hw09)
 
