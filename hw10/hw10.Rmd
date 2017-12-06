@@ -1,0 +1,152 @@
+---
+title: "Homework 10"
+author: "Yuanji Sun"
+date: "December 6, 2017"
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+library(magrittr)
+library(purrr)
+library(glue)
+library(stringr)
+library(rvest)
+library(xml2)
+library(ggplot2)
+```
+
+
+1. Cannot knit
+2. For loop, display figures and save in report
+3. figure title, axis change
+4. store figures in row and column
+5. API?
+6. hw7 grade
+
+
+
+# Part 1:
+Step 1: Get the URL of the data set and store the URL contents to a variable.
+```{r}
+url <- "http://usjgofs.whoi.edu/jg/serv/jgofs/arabian/ttn-039/bottle.flat1?event%20eq%20092111.0"
+page_title <- read_html(url)
+View(page_title)
+```
+
+Step 2: Extract the data in the text form.
+```{r}
+txt_data <- xml_text(page_title)
+```
+
+Step 3: Convert the text data into a dataframe.
+```{r}
+data <- read.table(text=txt_data,skip=1,col.names=c('event','sta', "cast", "date", "time", "lat_begin", "lon_begin",
+                                                    "bot", "press","temp", "sal_bot","O2_ml_L", "O2_umol_kg",
+                                                    "O2_umol_L", "O2_4", "NO3", "PO4", "SiO4", "NO2", "NH4"))
+```
+
+Step 4: Generate figures for selected variable vs `press`. `press` can be taken as depth.
+```{r}
+figure = list()
+for (i in 16:20) {
+        variable <- colnames(data)[i]
+        figure[i-15] <- ggplot(data=data, mapping=aes(x=data[[i]], y=-data[[9]])) + geom_point() +
+                labs(x = colnames(data)[i], y = "Depth (m)")
+}
+```
+
+# Part 2
+
+Step 1: Get the URL of all data set, which contains lots of links of detailed data (just like the data in Part 1).
+```{r}
+main_URL <- "http://usjgofs.whoi.edu/jg/serv/jgofs/arabian/ttn-039/bottle.html0%7Bdir=usjgofs.whoi.edu/jg/dir/jgofs/arabian/ttn-039/,info=usjgofs.whoi.edu/jg/info/jgofs/arabian/ttn-039/bottle%7D"
+```
+
+Step 2: Extract event numbers in the webpage. All data in the dataframe are stored in character form.
+```{r}
+main_page_title <- read_html(main_URL)
+raw_info <- main_page_title %>% xml_text()
+info <- read.table(text=raw_info,skip=13,col.names=c("event", "sta", "cast", "date", "time", "lat_begin",
+                                                        "lon_begin"), colClasses = "character")
+event <- info$event
+```
+
+Step 3: Modify the event number by adding `20` before the number. This is because the link of the data ending with `20` + event numbers.
+```{r}
+for (i in 1:length(event)){
+      event[i] <- paste("20", event[i], sep = "")
+}
+```
+
+Step 4: Generating URLs for all data webpage. The URL has the commmon format, "http://usjgofs.whoi.edu/jg/serv/jgofs/arabian/ttn-039/bottle.flat1?event%20eq%" + event number. Let's have a look at all websites and check some of them.
+```{r}
+sub_URL = ""
+for (i in 1:length(event)){
+      sub_URL[i] <- paste("http://usjgofs.whoi.edu/jg/serv/jgofs/arabian/ttn-039/bottle.flat1?event%20eq%",
+                          event[i], sep = "")
+}
+sub_URL
+```
+
+Step 5. Analyze all data from different webpages at the same time. The idea is to put what I did in Part 1 in a loop and generate figures automatically.
+```{r}
+for  (i in 1:length(sub_URL)){
+        page_title <- read_html(sub_URL[i])
+        txt_data <- xml_text(page_title)
+        data <- read.table(text=txt_data,skip=1,col.names=c('event','sta', "cast", "date", "time", "lat_begin",
+                                                            "lon_begin","bot", "press","temp", "sal_bot","O2_ml_L",
+                                                            "O2_umol_kg","O2_umol_L", "O2_4", "NO3", "PO4", "SiO4",
+                                                            "NO2", "NH4"))
+        figure = list()
+        for (j in 16:20) {
+                variable <- colnames(data)[i]
+                figure[i-15] <- ggplot(data=data, mapping=aes(x=data[[i]], y=-data[[9]])) +
+                        geom_point() +
+                        labs(x = colnames(data)[i], y = "Depth (m)", title = paste("Event", event[i], sep = " "))
+        }
+}
+
+```
+
+
+
+
+
+
+
+
+
+
+```{r}
+
+
+```
+
+
+
+
+```{r}
+
+
+```
+
+
+
+```{r}
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
