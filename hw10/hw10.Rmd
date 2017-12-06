@@ -19,9 +19,9 @@ library(ggplot2)
 
 1. Cannot knit
 2. For loop, display figures and save in report
-3. figure title, axis change
+3. figure title, axis change, figure not change
 4. store figures in row and column
-5. API?
+5. API? API Key?
 6. hw7 grade
 
 
@@ -48,10 +48,12 @@ data <- read.table(text=txt_data,skip=1,col.names=c('event','sta', "cast", "date
 
 Step 4: Generate figures for selected variable vs `press`. `press` can be taken as depth.
 ```{r}
-figure = list()
+plot_list = list()
 for (i in 16:20) {
         variable <- colnames(data)[i]
-        figure[i-15] <- ggplot(data=data, mapping=aes(x=data[[i]], y=-data[[9]])) + geom_point() +
+        plot_list[[i-15]] <- ggplot(data=data, mapping=aes(x=data[[i]], y=-data[[9]])) +
+        	geom_point() +
+        	geom_path() +
                 labs(x = colnames(data)[i], y = "Depth (m)")
 }
 ```
@@ -98,10 +100,10 @@ for  (i in 1:length(sub_URL)){
                                                             "lon_begin","bot", "press","temp", "sal_bot","O2_ml_L",
                                                             "O2_umol_kg","O2_umol_L", "O2_4", "NO3", "PO4", "SiO4",
                                                             "NO2", "NH4"))
-        figure = list()
+        plot_list = list()
         for (j in 16:20) {
                 variable <- colnames(data)[i]
-                figure[i-15] <- ggplot(data=data, mapping=aes(x=data[[i]], y=-data[[9]])) +
+                plot_list[[i-15]] <- ggplot(data=data, mapping=aes(x=data[[i]], y=-data[[9]])) +
                         geom_point() +
                         labs(x = colnames(data)[i], y = "Depth (m)", title = paste("Event", event[i], sep = " "))
         }
