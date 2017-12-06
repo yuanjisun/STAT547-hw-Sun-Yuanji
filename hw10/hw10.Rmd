@@ -14,10 +14,10 @@ library(stringr)
 library(rvest)
 library(xml2)
 library(ggplot2)
+library(cowplot)
 ```
 
 
-1. Cannot knit
 2. For loop, display figures and save in report
 3. figure title, axis change, figure not change
 4. store figures in row and column
@@ -31,7 +31,6 @@ Step 1: Get the URL of the data set and store the URL contents to a variable.
 ```{r}
 url <- "http://usjgofs.whoi.edu/jg/serv/jgofs/arabian/ttn-039/bottle.flat1?event%20eq%20092111.0"
 page_title <- read_html(url)
-View(page_title)
 ```
 
 Step 2: Extract the data in the text form.
@@ -44,6 +43,7 @@ Step 3: Convert the text data into a dataframe.
 data <- read.table(text=txt_data,skip=1,col.names=c('event','sta', "cast", "date", "time", "lat_begin", "lon_begin",
                                                     "bot", "press","temp", "sal_bot","O2_ml_L", "O2_umol_kg",
                                                     "O2_umol_L", "O2_4", "NO3", "PO4", "SiO4", "NO2", "NH4"))
+data$depth <- -data$press
 ```
 
 Step 4: Generate figures for selected variable vs `press`. `press` can be taken as depth.
@@ -51,7 +51,7 @@ Step 4: Generate figures for selected variable vs `press`. `press` can be taken 
 plot_list = list()
 for (i in 16:20) {
         variable <- colnames(data)[i]
-        plot_list[[i-15]] <- ggplot(data=data, mapping=aes(x=data[[i]], y=-data[[9]])) +
+        plot_list[[i-15]] <- ggplot(data=data, mapping=aes_string(x=variable, y="depth")) +
         	geom_point() +
         	geom_path() +
                 labs(x = colnames(data)[i], y = "Depth (m)")
@@ -93,21 +93,32 @@ sub_URL
 
 Step 5. Analyze all data from different webpages at the same time. The idea is to put what I did in Part 1 in a loop and generate figures automatically.
 ```{r}
+
+k <- 0
 for  (i in 1:length(sub_URL)){
         page_title <- read_html(sub_URL[i])
         txt_data <- xml_text(page_title)
         data <- read.table(text=txt_data,skip=1,col.names=c('event','sta', "cast", "date", "time", "lat_begin",
                                                             "lon_begin","bot", "press","temp", "sal_bot","O2_ml_L",
                                                             "O2_umol_kg","O2_umol_L", "O2_4", "NO3", "PO4", "SiO4",
-                                                            "NO2", "NH4"))
+                                                            "NO2", "NH4"), na.strings = "nd")
+
+        data$depth <- -data$press
         plot_list = list()
-        for (j in 16:20) {
-                variable <- colnames(data)[i]
-                plot_list[[i-15]] <- ggplot(data=data, mapping=aes(x=data[[i]], y=-data[[9]])) +
+        for (j in 19:20) {
+        	k <- k+1
+                variable <- colnames(data)[j]
+                data[[variable]] <- as.numeric(data[[variable]])
+                plot_list[[k]] <- ggplot(data=data, mapping=aes_string(x=variable, y="depth")) +
                         geom_point() +
-                        labs(x = colnames(data)[i], y = "Depth (m)", title = paste("Event", event[i], sep = " "))
+                        labs(x = colnames(data)[j], y = "Depth (m)", title = paste("Event", event[i], sep = " "))
+                
         }
+        plot_list <- c(plot_list, nrow=1)
+        print(do.call(plot_grid, plot_list))
 }
+#plot_list <- c(plot_list, ncol=2)
+#do.call(plot_grid, plot_list)
 
 ```
 
