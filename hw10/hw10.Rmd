@@ -2,12 +2,15 @@
 title: "Homework 10"
 author: "Yuanji Sun"
 date: "December 6, 2017"
-output: github_document
+output: 
+  html_document: 
+    keep_md: yes
 ---
 
 # Load libraries
 ```{r}
 library(tidyverse)
+library(httr)
 library(magrittr)
 library(purrr)
 library(glue)
@@ -16,9 +19,64 @@ library(rvest)
 library(xml2)
 library(ggplot2)
 library(cowplot)
+library(leaflet)
 ```
 
-# Part 1: Analyze oceanographic data (JGOFS) from single webpage
+# Part 1: Work with OpenWeatherMap
+Step 1: Write a function to get the weather data, and select important information for output.
+
+__Remember to put your API Key in double quotation marks.__
+```{r}
+get_weather <- function(city_name, country_code, API_key) {
+	query_string <- glue("api.openweathermap.org/data/2.5/weather?q={city_name},{country_code}&APPID={API_key}")
+	weather_result <- GET(query_string)
+	weather_content <- data.frame(content(weather_result))
+	weather_output <- weather_content %>%
+	        select(name, sys.country, coord.lon, coord.lat, weather.description, main.temp)
+	return(weather_output)
+}
+```
+
+Step 2: Get weather information of major cities in China.
+```{r}
+result_Beijing <- get_weather("Beijing","CN","7ce93051a99b9283279834f10c83f037")
+result_Hangzhou <- get_weather("Hangzhou","CN","7ce93051a99b9283279834f10c83f037")
+result_Shanghai <- get_weather("Shanghai","CN","7ce93051a99b9283279834f10c83f037")
+result_Xiamen <- get_weather("Xiamen","CN","7ce93051a99b9283279834f10c83f037")
+result_Chengdu <- get_weather("Chengdu","CN","7ce93051a99b9283279834f10c83f037")
+result_Harbin <- get_weather("Harbin","CN","7ce93051a99b9283279834f10c83f037")
+result_Tianjin <- get_weather("Tianjin","CN","7ce93051a99b9283279834f10c83f037")
+result_Shijiazhuang <- get_weather("Shijiazhuang","CN","7ce93051a99b9283279834f10c83f037")
+result_Xian <- get_weather("Xian","CN","7ce93051a99b9283279834f10c83f037")
+result_Jinan <- get_weather("Jinan","CN","7ce93051a99b9283279834f10c83f037")
+result_Zhenzhou <- get_weather("Zhenzhou","CN","7ce93051a99b9283279834f10c83f037")
+result_Wuhan <- get_weather("Wuhan","CN","7ce93051a99b9283279834f10c83f037")
+result_Guiyang <- get_weather("Guiyang","CN","7ce93051a99b9283279834f10c83f037")
+result_Changsha <- get_weather("Changsha","CN","7ce93051a99b9283279834f10c83f037")
+result_Lanzhou <- get_weather("Lanzhou","CN","7ce93051a99b9283279834f10c83f037")
+result_Kunming <- get_weather("Kunming","CN","7ce93051a99b9283279834f10c83f037")
+result_Nanning <- get_weather("Nanning","CN","7ce93051a99b9283279834f10c83f037")
+result_Guangzhou <- get_weather("Guangzhou","CN","7ce93051a99b9283279834f10c83f037")
+result_Shenyang <- get_weather("Shenyang","CN","7ce93051a99b9283279834f10c83f037")
+result_Changchun <- get_weather("Changchun","CN","7ce93051a99b9283279834f10c83f037")
+result_Nanchang <- get_weather("Nanchang","CN","7ce93051a99b9283279834f10c83f037")
+(result_df <- rbind(result_Beijing, result_Hangzhou, result_Shanghai, result_Xiamen, result_Chengdu, result_Harbin, 
+                    result_Tianjin, result_Shijiazhuang, result_Xian, result_Jinan, result_Zhenzhou, result_Guiyang,
+                    result_Wuhan, result_Changsha, result_Lanzhou, result_Kunming, result_Nanning, result_Guangzhou,
+                    result_Shenyang, result_Changchun, result_Nanchang))
+
+```
+
+Step 3: Make an interactive map using `leaflet()` and add weather information on the pop-up. (Sorry, city names in the map are Chinese.)
+
+__To view this map, please see HTML version. Map is NOT supported in MD file.__
+```{r}
+leaflet() %>%
+        addTiles() %>%
+        addMarkers(lng=result_df$coord.lon, lat=result_df$coord.lat, popup=result_df$weather.description)
+```
+
+# Part 2: Analyze oceanographic data (JGOFS) from single webpage
 Step 1: Get the URL of the data set and store the URL contents to a variable.
 ```{r}
 url <- "http://usjgofs.whoi.edu/jg/serv/jgofs/arabian/ttn-039/bottle.flat1?event%20eq%20092111.0"
@@ -52,7 +110,7 @@ for (i in 16:20) {
 print(plot_list)
 ```
 
-# Part 2: Analyze oceanographic data (JGOFS) automatically from multiple webpage
+# Part 3: Analyze oceanographic data (JGOFS) automatically from multiple webpage
 Step 1: Get the URL of all data set, which contains lots of links of detailed data (just like the data in Part 1).
 ```{r}
 main_URL <- "http://usjgofs.whoi.edu/jg/serv/jgofs/arabian/ttn-039/bottle.html0%7Bdir=usjgofs.whoi.edu/jg/dir/jgofs/arabian/ttn-039/,info=usjgofs.whoi.edu/jg/info/jgofs/arabian/ttn-039/bottle%7D"
@@ -116,43 +174,4 @@ print(plot_list)
 ```
 
 
-
-
-
-
-
-
-
-
-```{r}
-
-
-```
-
-
-
-
-```{r}
-
-
-```
-
-
-
-```{r}
-
-
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
+[This is the end of Homework 10.]
