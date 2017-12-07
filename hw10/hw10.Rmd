@@ -37,7 +37,7 @@ get_weather <- function(city_name, country_code, API_key) {
 }
 ```
 
-Step 2: Get weather information of major cities in China.
+Step 2: Get weather information of major cities in China. To get your own API key, please visit [Open Weather Map](https://openweathermap.org/api). A free API is enough for this homework.
 ```{r}
 result_Beijing <- get_weather("Beijing","CN","7ce93051a99b9283279834f10c83f037")
 result_Hangzhou <- get_weather("Hangzhou","CN","7ce93051a99b9283279834f10c83f037")
@@ -64,7 +64,6 @@ result_Nanchang <- get_weather("Nanchang","CN","7ce93051a99b9283279834f10c83f037
                     result_Tianjin, result_Shijiazhuang, result_Xian, result_Jinan, result_Zhenzhou, result_Guiyang,
                     result_Wuhan, result_Changsha, result_Lanzhou, result_Kunming, result_Nanning, result_Guangzhou,
                     result_Shenyang, result_Changchun, result_Nanchang))
-
 ```
 
 Step 3: Make an interactive map using `leaflet()` and add weather information on the pop-up. (Sorry, city names in the map are Chinese.)
@@ -74,6 +73,38 @@ __To view this map, please see HTML version. Map is NOT supported in MD file.__
 leaflet() %>%
         addTiles() %>%
         addMarkers(lng=result_df$coord.lon, lat=result_df$coord.lat, popup=result_df$weather.description)
+```
+
+Step 4: Modify the function with a for loop.
+
+It is a waste of time to get data one by one. I would like to enter all cities once and call the function only once. __This work is only designed for Chinese cities with a weather map, so the country code is only "CN". If you want to use this for other countries, the function needs to be modified slightly.__
+```{r}
+all_result <- data.frame(matrix(ncol = 6, nrow = 0))
+col_name <- c("name", "sys.country", "coord.lon", "coord.lat", "weather.description", "main.temp")
+colnames(all_result) <- col_name
+get_weather_2 <- function(city_name, country_code, API_key) {
+        for (i in 1:length(city_name)){
+                query_string<-glue("api.openweathermap.org/data/2.5/weather?q={city_name[i]},{country_code}&APPID={API_key}")
+                weather_result <- GET(query_string)
+                weather_content <- data.frame(content(weather_result))
+                weather_output <- weather_content %>%
+	                select(name, sys.country, coord.lon, coord.lat, weather.description, main.temp)
+                all_result <- rbind(all_result, weather_output)
+        }
+	return(all_result)
+}
+```
+
+Let's have a try, getting a full results and an interactive map.
+```{r}
+city <- c("Beijing","Hangzhou","Shanghai","Xiamen","Chengdu","Harbin","Tianjin","Shijiazhuang","Xian","Jinan",
+          "Zhenzhou","Wuhan","Guiyang","Changsha","Lanzhou","Kunming","Nanning","Guangzhou","Shenyang","Changchun",
+          "Nanchang")
+(weather_all_city <- get_weather_2(city,"CN","7ce93051a99b9283279834f10c83f037"))
+leaflet() %>%
+        addTiles() %>%
+        addMarkers(lng=weather_all_city$coord.lon, lat=weather_all_city$coord.lat,
+                   popup=weather_all_city$weather.description)
 ```
 
 # Part 2: Analyze oceanographic data (JGOFS) from single webpage
