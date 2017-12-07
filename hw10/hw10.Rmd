@@ -6,6 +6,21 @@ output:
   html_document: 
     keep_md: yes
 ---
+# Report process
+I ran into and solved the following problems when doing this homework.
+
+1. API key must be put in double quotation mark. Otherwise, the function will not work.
+2. The raw weather data of different cities has different lengths, and even for the same city, the data length will change when the data is updated every a few hours. Thus, I selected the most important and common vaiables and created a dataframe.
+3. For Part 3, I noticed that the missing value was in `nd` on the website. In order to generate an empty figure if all values are missing, I should use `na.strings = "nd"` and then convert it to numeric form. This is because I cannot use `NA_integer_` or other similar code in `read.table()`.
+4. There is a bug of `ggplot()`. In the for loop, I used `ggplot(data=data, mapping=colnames(data)[j], y="depth"))`. Yes, it is right logically but when `j` changes, the previous figure will also be changed. This is because even though the figure is generated and saved in `plot_list`, the figure is still linked with `j` and will change. Thus, in my first trial, all figures were the same except the axis names.
+
+
+__Useful resource__
+
+1. Google
+2. Lecture notes
+3. R for Data Science
+
 
 # Load libraries
 ```{r}
@@ -19,6 +34,7 @@ library(rvest)
 library(xml2)
 library(ggplot2)
 library(cowplot)
+library(knitr)
 library(leaflet)
 ```
 
@@ -60,10 +76,11 @@ result_Guangzhou <- get_weather("Guangzhou","CN","7ce93051a99b9283279834f10c83f0
 result_Shenyang <- get_weather("Shenyang","CN","7ce93051a99b9283279834f10c83f037")
 result_Changchun <- get_weather("Changchun","CN","7ce93051a99b9283279834f10c83f037")
 result_Nanchang <- get_weather("Nanchang","CN","7ce93051a99b9283279834f10c83f037")
-(result_df <- rbind(result_Beijing, result_Hangzhou, result_Shanghai, result_Xiamen, result_Chengdu, result_Harbin, 
+result_df <- rbind(result_Beijing, result_Hangzhou, result_Shanghai, result_Xiamen, result_Chengdu, result_Harbin, 
                     result_Tianjin, result_Shijiazhuang, result_Xian, result_Jinan, result_Zhenzhou, result_Guiyang,
                     result_Wuhan, result_Changsha, result_Lanzhou, result_Kunming, result_Nanning, result_Guangzhou,
-                    result_Shenyang, result_Changchun, result_Nanchang))
+                    result_Shenyang, result_Changchun, result_Nanchang)
+kable(result_df)
 ```
 
 Step 3: Make an interactive map using `leaflet()` and add weather information on the pop-up. (Sorry, city names in the map are Chinese.)
@@ -100,7 +117,8 @@ Let's have a try, getting a full results and an interactive map.
 city <- c("Beijing","Hangzhou","Shanghai","Xiamen","Chengdu","Harbin","Tianjin","Shijiazhuang","Xian","Jinan",
           "Zhenzhou","Wuhan","Guiyang","Changsha","Lanzhou","Kunming","Nanning","Guangzhou","Shenyang","Changchun",
           "Nanchang")
-(weather_all_city <- get_weather_2(city,"CN","7ce93051a99b9283279834f10c83f037"))
+weather_all_city <- get_weather_2(city,"CN","7ce93051a99b9283279834f10c83f037")
+kable(weather_all_city)
 leaflet() %>%
         addTiles() %>%
         addMarkers(lng=weather_all_city$coord.lon, lat=weather_all_city$coord.lat,
@@ -171,6 +189,11 @@ for (i in 1:length(event)){
                           event[i], sep = "")
 }
 sub_URL
+```
+
+Since the data in the second link is extremely bad (even worse than all `NA`), I would like to remove it.
+```{r}
+sub_URL <- sub_URL[-2]
 ```
 
 Step 5. Analyze all data from different webpages at the same time. The idea is to put what I did in Part 1 in a loop and generate figures automatically.
