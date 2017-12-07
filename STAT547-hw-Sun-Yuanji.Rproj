@@ -11,8 +11,3 @@ Encoding: UTF-8
 
 RnwWeave: Sweave
 LaTeX: pdfLaTeX
-
-BuildType: Package
-PackageUseDevtools: Yes
-PackagePath: hw09/marine
-PackageInstallArgs: --no-multiarch --with-keep.source

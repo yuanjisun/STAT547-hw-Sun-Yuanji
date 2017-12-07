@@ -5,6 +5,7 @@ date: "December 6, 2017"
 output: github_document
 ---
 
+# Load libraries
 ```{r}
 library(tidyverse)
 library(magrittr)
@@ -17,16 +18,7 @@ library(ggplot2)
 library(cowplot)
 ```
 
-
-2. For loop, display figures and save in report
-3. figure title, axis change, figure not change
-4. store figures in row and column
-5. API? API Key?
-6. hw7 grade
-
-
-
-# Part 1:
+# Part 1: Analyze oceanographic data (JGOFS) from single webpage
 Step 1: Get the URL of the data set and store the URL contents to a variable.
 ```{r}
 url <- "http://usjgofs.whoi.edu/jg/serv/jgofs/arabian/ttn-039/bottle.flat1?event%20eq%20092111.0"
@@ -44,6 +36,7 @@ data <- read.table(text=txt_data,skip=1,col.names=c('event','sta', "cast", "date
                                                     "bot", "press","temp", "sal_bot","O2_ml_L", "O2_umol_kg",
                                                     "O2_umol_L", "O2_4", "NO3", "PO4", "SiO4", "NO2", "NH4"))
 data$depth <- -data$press
+data
 ```
 
 Step 4: Generate figures for selected variable vs `press`. `press` can be taken as depth.
@@ -56,10 +49,10 @@ for (i in 16:20) {
         	geom_path() +
                 labs(x = colnames(data)[i], y = "Depth (m)")
 }
+print(plot_list)
 ```
 
-# Part 2
-
+# Part 2: Analyze oceanographic data (JGOFS) automatically from multiple webpage
 Step 1: Get the URL of all data set, which contains lots of links of detailed data (just like the data in Part 1).
 ```{r}
 main_URL <- "http://usjgofs.whoi.edu/jg/serv/jgofs/arabian/ttn-039/bottle.html0%7Bdir=usjgofs.whoi.edu/jg/dir/jgofs/arabian/ttn-039/,info=usjgofs.whoi.edu/jg/info/jgofs/arabian/ttn-039/bottle%7D"
@@ -92,9 +85,11 @@ sub_URL
 ```
 
 Step 5. Analyze all data from different webpages at the same time. The idea is to put what I did in Part 1 in a loop and generate figures automatically.
-```{r}
 
+__If all data in the data set is "NA", an empty plot will be returned. Also, if there are too many `NA` values (only a few valid data points), there will be no line in the figure.__
+```{r}
 k <- 0
+plot_list = list()
 for  (i in 1:length(sub_URL)){
         page_title <- read_html(sub_URL[i])
         txt_data <- xml_text(page_title)
@@ -102,24 +97,22 @@ for  (i in 1:length(sub_URL)){
                                                             "lon_begin","bot", "press","temp", "sal_bot","O2_ml_L",
                                                             "O2_umol_kg","O2_umol_L", "O2_4", "NO3", "PO4", "SiO4",
                                                             "NO2", "NH4"), na.strings = "nd")
-
         data$depth <- -data$press
-        plot_list = list()
-        for (j in 19:20) {
+        for (j in 16:20) {
         	k <- k+1
                 variable <- colnames(data)[j]
                 data[[variable]] <- as.numeric(data[[variable]])
                 plot_list[[k]] <- ggplot(data=data, mapping=aes_string(x=variable, y="depth")) +
                         geom_point() +
+                        geom_path() +
                         labs(x = colnames(data)[j], y = "Depth (m)", title = paste("Event", event[i], sep = " "))
-                
         }
-        plot_list <- c(plot_list, nrow=1)
-        print(do.call(plot_grid, plot_list))
 }
-#plot_list <- c(plot_list, ncol=2)
-#do.call(plot_grid, plot_list)
+print(plot_list)
 
+# Alternative way to print all plots (more complex way)
+# plot_list <- c(plot_list, nrow=1)
+# print(do.call(plot_grid, plot_list))
 ```
 
 
