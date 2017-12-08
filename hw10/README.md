@@ -10,9 +10,9 @@ Part 3: Get oceanographic data from a bunch of WHOI websites and generate plots.
 
 __Note: Due to the security consideration, all API keys are replaced with `XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`. Please get your own AKI key and replace `XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX` before running the code.__
 
-[Link to RMD file](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/blob/master/hw10/hw10.Rmd)
+__Since an interactive map is used in my homework, which is not supported by MD file, I knitted my homework into HTML.__
 
-[Link to MD file](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/blob/master/hw10/hw10.md)
+[Link to RMD file](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/blob/master/hw10/hw10.Rmd)
 
 [Link to HTML file](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/blob/master/hw10/hw10.html)
 

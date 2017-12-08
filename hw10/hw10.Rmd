@@ -2,9 +2,7 @@
 title: "Homework 10"
 author: "Yuanji Sun"
 date: "December 6, 2017"
-output: 
-  html_document: 
-    keep_md: yes
+output: html_document
 ---
 # Report process
 I ran into and solved the following problems when doing this homework.
@@ -58,33 +56,32 @@ get_weather <- function(city_name, country_code, API_key) {
 
 Step 2: Get weather information of major cities in China. To get your own API key, please visit [Open Weather Map](https://openweathermap.org/api). A free API is enough for this homework.
 ```{r}
-result_Beijing <- get_weather("Beijing","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Hangzhou <- get_weather("Hangzhou","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Shanghai <- get_weather("Shanghai","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Xiamen <- get_weather("Xiamen","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Chengdu <- get_weather("Chengdu","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Harbin <- get_weather("Harbin","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Tianjin <- get_weather("Tianjin","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Shijiazhuang <- get_weather("Shijiazhuang","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Xian <- get_weather("Xian","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Jinan <- get_weather("Jinan","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Zhenzhou <- get_weather("Zhenzhou","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Wuhan <- get_weather("Wuhan","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Guiyang <- get_weather("Guiyang","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Changsha <- get_weather("Changsha","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Lanzhou <- get_weather("Lanzhou","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Kunming <- get_weather("Kunming","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Nanning <- get_weather("Nanning","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Guangzhou <- get_weather("Guangzhou","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Shenyang <- get_weather("Shenyang","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Changchun <- get_weather("Changchun","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-result_Nanchang <- get_weather("Nanchang","CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+result_Beijing <- get_weather("Beijing","CN","7ce93051a99b9283279834f10c83f037")
+result_Hangzhou <- get_weather("Hangzhou","CN","7ce93051a99b9283279834f10c83f037")
+result_Shanghai <- get_weather("Shanghai","CN","7ce93051a99b9283279834f10c83f037")
+result_Xiamen <- get_weather("Xiamen","CN","7ce93051a99b9283279834f10c83f037")
+result_Chengdu <- get_weather("Chengdu","CN","7ce93051a99b9283279834f10c83f037")
+result_Harbin <- get_weather("Harbin","CN","7ce93051a99b9283279834f10c83f037")
+result_Tianjin <- get_weather("Tianjin","CN","7ce93051a99b9283279834f10c83f037")
+result_Shijiazhuang <- get_weather("Shijiazhuang","CN","7ce93051a99b9283279834f10c83f037")
+result_Xian <- get_weather("Xian","CN","7ce93051a99b9283279834f10c83f037")
+result_Jinan <- get_weather("Jinan","CN","7ce93051a99b9283279834f10c83f037")
+result_Zhenzhou <- get_weather("Zhenzhou","CN","7ce93051a99b9283279834f10c83f037")
+result_Wuhan <- get_weather("Wuhan","CN","7ce93051a99b9283279834f10c83f037")
+result_Guiyang <- get_weather("Guiyang","CN","7ce93051a99b9283279834f10c83f037")
+result_Changsha <- get_weather("Changsha","CN","7ce93051a99b9283279834f10c83f037")
+result_Lanzhou <- get_weather("Lanzhou","CN","7ce93051a99b9283279834f10c83f037")
+result_Kunming <- get_weather("Kunming","CN","7ce93051a99b9283279834f10c83f037")
+result_Nanning <- get_weather("Nanning","CN","7ce93051a99b9283279834f10c83f037")
+result_Guangzhou <- get_weather("Guangzhou","CN","7ce93051a99b9283279834f10c83f037")
+result_Shenyang <- get_weather("Shenyang","CN","7ce93051a99b9283279834f10c83f037")
+result_Changchun <- get_weather("Changchun","CN","7ce93051a99b9283279834f10c83f037")
+result_Nanchang <- get_weather("Nanchang","CN","7ce93051a99b9283279834f10c83f037")
 result_df <- rbind(result_Beijing, result_Hangzhou, result_Shanghai, result_Xiamen, result_Chengdu,
 		   result_Harbin, result_Tianjin, result_Shijiazhuang, result_Xian, result_Jinan,
 		   result_Zhenzhou, result_Guiyang, result_Wuhan, result_Changsha, result_Lanzhou, 
 		   result_Kunming, result_Nanning, result_Guangzhou, result_Shenyang, 
 		   result_Changchun, result_Nanchang)
-kable(result_df)
 ```
 
 Step 3: Make an interactive map using `leaflet()` and add weather information on the pop-up. (Sorry, city names in the map are Chinese.)
@@ -122,7 +119,7 @@ Let's have a try, getting a full results and an interactive map.
 city <- c("Beijing","Hangzhou","Shanghai","Xiamen","Chengdu","Harbin","Tianjin","Shijiazhuang","Xian",
 	  "Jinan","Zhenzhou","Wuhan","Guiyang","Changsha","Lanzhou","Kunming","Nanning","Guangzhou",
 	  "Shenyang","Changchun","Nanchang")
-weather_all_city <- get_weather_2(city,"CN","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+weather_all_city <- get_weather_2(city,"CN","7ce93051a99b9283279834f10c83f037")
 kable(weather_all_city)
 leaflet() %>%
         addTiles() %>%
@@ -148,7 +145,6 @@ data <- read.table(text=txt_data,skip=1,col.names=c('event','sta', "cast", "date
 	"lon_begin", "bot", "press","temp", "sal_bot","O2_ml_L", "O2_umol_kg", "O2_umol_L", "O2_4", "NO3",
 	"PO4", "SiO4", "NO2", "NH4"))
 data$depth <- -data$press
-kable(data)
 ```
 
 Step 4: Generate figures for selected variable vs `press`. In Oceanography, `press` can be taken as depth.
