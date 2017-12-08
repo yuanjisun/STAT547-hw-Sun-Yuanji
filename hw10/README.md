@@ -23,4 +23,6 @@ __Report process__
 Please see the RMD/MD/HTML file.
 
 __Acknowlegement__
-All oceanography data comes from WHOI website, which is open to public. Weather information is obtained from https://openweathermap.org/api.
+
+1. All oceanography data comes from WHOI website, which is open to public for free.
+2. Weather information is obtained from https://openweathermap.org/api.
