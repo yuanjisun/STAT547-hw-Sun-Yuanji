@@ -275,8 +275,8 @@ result_df</code></pre>
         addProviderTiles(providers$Esri.NatGeoWorldMap) %&gt;%  
         addMarkers(popup = ~ Weather)</code></pre>
 <pre><code>## Assuming 'longitude' and 'latitude' are longitude and latitude, respectively</code></pre>
-<div id="htmlwidget-5a685d5470c0dec5fe1b" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5a685d5470c0dec5fe1b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]},{"method":"addMarkers","args":[[39.91,30.29,31.22,24.48,30.67,45.75,39.14,38.04,34.26,36.67,32.27,26.58,30.58,28.2,36.06,25.04,22.82,23.12,41.79,43.88,28.68],[116.4,120.16,121.46,118.08,104.07,126.65,117.18,114.48,108.93,117,119.18,106.72,114.27,112.97,103.79,102.72,108.32,113.25,123.43,125.32,115.88],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["clear sky","clear sky","clear sky","clear sky","clear sky","light snow","clear sky","clear sky","clear sky","clear sky","clear sky","overcast clouds","clear sky","clear sky","clear sky","mist","clear sky","clear sky","clear sky","light snow","clear sky"],null,null,null,null,null,null]}],"limits":{"lat":[22.82,45.75],"lng":[102.72,126.65]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-0e82b8abab8148b5d680" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0e82b8abab8148b5d680">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]},{"method":"addMarkers","args":[[39.91,30.29,31.22,24.48,30.67,45.75,39.14,38.04,34.26,36.67,32.27,26.58,30.58,28.2,36.06,25.04,22.82,23.12,41.79,43.88,28.68],[116.4,120.16,121.46,118.08,104.07,126.65,117.18,114.48,108.93,117,119.18,106.72,114.27,112.97,103.79,102.72,108.32,113.25,123.43,125.32,115.88],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["clear sky","clear sky","clear sky","clear sky","clear sky","light snow","clear sky","clear sky","clear sky","clear sky","clear sky","overcast clouds","clear sky","clear sky","clear sky","mist","clear sky","clear sky","clear sky","light snow","clear sky"],null,null,null,null,null,null]}],"limits":{"lat":[22.82,45.75],"lng":[102.72,126.65]}},"evals":[],"jsHooks":[]}</script>
 <p>Step 4: Modify the function with a for loop.</p>
 <p>It is a waste of time to get data one by one. I would like to enter all cities once and call the function only once. <strong>This work is only designed for Chinese cities with a weather map (single country), so the country code is only “CN”. If you want to use this for more than one countries, the function needs to be modified slightly.</strong></p>
 <pre class="r"><code>get_weather_2 &lt;- function(city_name, country_code, API_key) {
@@ -304,8 +304,8 @@ result_df %&gt;%
         addProviderTiles(providers$Esri.NatGeoWorldMap) %&gt;%  
         addMarkers(popup = ~ Weather)</code></pre>
 <pre><code>## Assuming 'longitude' and 'latitude' are longitude and latitude, respectively</code></pre>
-<div id="htmlwidget-7682452a5b48d87817b2" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7682452a5b48d87817b2">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]},{"method":"addMarkers","args":[[39.91,30.29,31.22,24.48,30.67,45.75,39.14,38.04,34.26,36.67,32.27,26.58,30.58,28.2,36.06,25.04,22.82,23.12,41.79,43.88,28.68],[116.4,120.16,121.46,118.08,104.07,126.65,117.18,114.48,108.93,117,119.18,106.72,114.27,112.97,103.79,102.72,108.32,113.25,123.43,125.32,115.88],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["clear sky","clear sky","clear sky","clear sky","clear sky","light snow","clear sky","clear sky","clear sky","clear sky","clear sky","overcast clouds","clear sky","clear sky","clear sky","mist","clear sky","clear sky","clear sky","light snow","clear sky"],null,null,null,null,null,null]}],"limits":{"lat":[22.82,45.75],"lng":[102.72,126.65]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-8508f80c0b26c52f91cc" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8508f80c0b26c52f91cc">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]},{"method":"addMarkers","args":[[39.91,30.29,31.22,24.48,30.67,45.75,39.14,38.04,34.26,36.67,32.27,26.58,30.58,28.2,36.06,25.04,22.82,23.12,41.79,43.88,28.68],[116.4,120.16,121.46,118.08,104.07,126.65,117.18,114.48,108.93,117,119.18,106.72,114.27,112.97,103.79,102.72,108.32,113.25,123.43,125.32,115.88],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["clear sky","clear sky","clear sky","clear sky","clear sky","light snow","clear sky","clear sky","clear sky","clear sky","clear sky","overcast clouds","clear sky","clear sky","clear sky","mist","clear sky","clear sky","clear sky","light snow","clear sky"],null,null,null,null,null,null]}],"limits":{"lat":[22.82,45.75],"lng":[102.72,126.65]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="part-2-analyze-oceanographic-data-jgofs-from-single-webpage" class="section level1">
 <h1>Part 2: Analyze oceanographic data (JGOFS) from single webpage</h1>
@@ -319,588 +319,82 @@ page_title &lt;- read_html(url)</code></pre>
     &quot;lon_begin&quot;, &quot;bot&quot;, &quot;press&quot;,&quot;temp&quot;, &quot;sal_bot&quot;,&quot;O2_ml_L&quot;, &quot;O2_umol_kg&quot;, &quot;O2_umol_L&quot;, &quot;O2_4&quot;, &quot;NO3&quot;,
     &quot;PO4&quot;, &quot;SiO4&quot;, &quot;NO2&quot;, &quot;NH4&quot;))
 data$depth &lt;- -data$press
-kable(data)</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th align="right">event</th>
-<th align="right">sta</th>
-<th align="right">cast</th>
-<th align="right">date</th>
-<th align="right">time</th>
-<th align="right">lat_begin</th>
-<th align="right">lon_begin</th>
-<th align="right">bot</th>
-<th align="right">press</th>
-<th align="right">temp</th>
-<th align="right">sal_bot</th>
-<th align="right">O2_ml_L</th>
-<th align="right">O2_umol_kg</th>
-<th align="right">O2_umol_L</th>
-<th align="left">O2_4</th>
-<th align="right">NO3</th>
-<th align="right">PO4</th>
-<th align="right">SiO4</th>
-<th align="right">NO2</th>
-<th align="right">NH4</th>
-<th align="right">depth</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">24</td>
-<td align="right">0.7</td>
-<td align="right">28.397</td>
-<td align="right">33.366</td>
-<td align="right">4.557</td>
-<td align="right">199.3</td>
-<td align="right">203.5</td>
-<td align="left">nd</td>
-<td align="right">0.1</td>
-<td align="right">0.08</td>
-<td align="right">2.9</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">-0.7</td>
-</tr>
-<tr class="even">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">23</td>
-<td align="right">0.7</td>
-<td align="right">28.399</td>
-<td align="right">33.365</td>
-<td align="right">4.562</td>
-<td align="right">199.5</td>
-<td align="right">203.7</td>
-<td align="left">nd</td>
-<td align="right">0.1</td>
-<td align="right">0.08</td>
-<td align="right">2.9</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">-0.7</td>
-</tr>
-<tr class="odd">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">22</td>
-<td align="right">26.2</td>
-<td align="right">28.145</td>
-<td align="right">33.360</td>
-<td align="right">4.567</td>
-<td align="right">199.7</td>
-<td align="right">204.0</td>
-<td align="left">nd</td>
-<td align="right">0.1</td>
-<td align="right">0.10</td>
-<td align="right">2.9</td>
-<td align="right">0.00</td>
-<td align="right">0.10</td>
-<td align="right">-26.2</td>
-</tr>
-<tr class="even">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">21</td>
-<td align="right">51.3</td>
-<td align="right">28.052</td>
-<td align="right">33.343</td>
-<td align="right">4.522</td>
-<td align="right">197.7</td>
-<td align="right">201.9</td>
-<td align="left">nd</td>
-<td align="right">0.1</td>
-<td align="right">0.10</td>
-<td align="right">2.9</td>
-<td align="right">0.01</td>
-<td align="right">0.09</td>
-<td align="right">-51.3</td>
-</tr>
-<tr class="odd">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">20</td>
-<td align="right">75.9</td>
-<td align="right">26.386</td>
-<td align="right">33.608</td>
-<td align="right">3.882</td>
-<td align="right">169.7</td>
-<td align="right">173.4</td>
-<td align="left">nd</td>
-<td align="right">2.8</td>
-<td align="right">0.36</td>
-<td align="right">5.5</td>
-<td align="right">0.43</td>
-<td align="right">0.17</td>
-<td align="right">-75.9</td>
-</tr>
-<tr class="even">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">19</td>
-<td align="right">101.2</td>
-<td align="right">21.500</td>
-<td align="right">34.362</td>
-<td align="right">1.797</td>
-<td align="right">78.4</td>
-<td align="right">80.3</td>
-<td align="left">nd</td>
-<td align="right">18.3</td>
-<td align="right">1.35</td>
-<td align="right">18.8</td>
-<td align="right">0.04</td>
-<td align="right">0.02</td>
-<td align="right">-101.2</td>
-</tr>
-<tr class="odd">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">18</td>
-<td align="right">101.3</td>
-<td align="right">21.450</td>
-<td align="right">34.362</td>
-<td align="right">1.799</td>
-<td align="right">78.5</td>
-<td align="right">80.3</td>
-<td align="left">nd</td>
-<td align="right">18.5</td>
-<td align="right">1.36</td>
-<td align="right">18.8</td>
-<td align="right">0.04</td>
-<td align="right">0.01</td>
-<td align="right">-101.3</td>
-</tr>
-<tr class="even">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">17</td>
-<td align="right">101.2</td>
-<td align="right">21.337</td>
-<td align="right">34.365</td>
-<td align="right">1.791</td>
-<td align="right">78.1</td>
-<td align="right">80.0</td>
-<td align="left">nd</td>
-<td align="right">18.5</td>
-<td align="right">1.36</td>
-<td align="right">19.0</td>
-<td align="right">0.04</td>
-<td align="right">0.08</td>
-<td align="right">-101.2</td>
-</tr>
-<tr class="odd">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">16</td>
-<td align="right">151.1</td>
-<td align="right">13.812</td>
-<td align="right">34.949</td>
-<td align="right">0.636</td>
-<td align="right">27.7</td>
-<td align="right">28.4</td>
-<td align="left">nd</td>
-<td align="right">30.5</td>
-<td align="right">2.17</td>
-<td align="right">34.2</td>
-<td align="right">0.01</td>
-<td align="right">0.01</td>
-<td align="right">-151.1</td>
-</tr>
-<tr class="even">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">15</td>
-<td align="right">201.5</td>
-<td align="right">13.141</td>
-<td align="right">34.989</td>
-<td align="right">0.607</td>
-<td align="right">26.4</td>
-<td align="right">27.1</td>
-<td align="left">nd</td>
-<td align="right">31.5</td>
-<td align="right">2.24</td>
-<td align="right">35.5</td>
-<td align="right">0.00</td>
-<td align="right">0.02</td>
-<td align="right">-201.5</td>
-</tr>
-<tr class="odd">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">14</td>
-<td align="right">201.7</td>
-<td align="right">13.141</td>
-<td align="right">34.987</td>
-<td align="right">0.619</td>
-<td align="right">26.9</td>
-<td align="right">27.6</td>
-<td align="left">nd</td>
-<td align="right">31.5</td>
-<td align="right">2.24</td>
-<td align="right">35.5</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">-201.7</td>
-</tr>
-<tr class="even">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">13</td>
-<td align="right">202.0</td>
-<td align="right">13.135</td>
-<td align="right">34.989</td>
-<td align="right">0.609</td>
-<td align="right">26.5</td>
-<td align="right">27.2</td>
-<td align="left">nd</td>
-<td align="right">31.6</td>
-<td align="right">2.24</td>
-<td align="right">35.5</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">-202.0</td>
-</tr>
-<tr class="odd">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">12</td>
-<td align="right">252.0</td>
-<td align="right">11.979</td>
-<td align="right">35.032</td>
-<td align="right">0.602</td>
-<td align="right">26.2</td>
-<td align="right">26.9</td>
-<td align="left">nd</td>
-<td align="right">32.7</td>
-<td align="right">2.31</td>
-<td align="right">37.4</td>
-<td align="right">0.00</td>
-<td align="right">0.02</td>
-<td align="right">-252.0</td>
-</tr>
-<tr class="even">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">11</td>
-<td align="right">302.4</td>
-<td align="right">11.201</td>
-<td align="right">35.027</td>
-<td align="right">0.529</td>
-<td align="right">23.0</td>
-<td align="right">23.6</td>
-<td align="left">nd</td>
-<td align="right">34.1</td>
-<td align="right">2.42</td>
-<td align="right">42.6</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">-302.4</td>
-</tr>
-<tr class="odd">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">10</td>
-<td align="right">302.2</td>
-<td align="right">11.204</td>
-<td align="right">35.027</td>
-<td align="right">0.532</td>
-<td align="right">23.2</td>
-<td align="right">23.8</td>
-<td align="left">nd</td>
-<td align="right">34.1</td>
-<td align="right">2.41</td>
-<td align="right">42.6</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">-302.2</td>
-</tr>
-<tr class="even">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">9</td>
-<td align="right">302.5</td>
-<td align="right">11.202</td>
-<td align="right">35.027</td>
-<td align="right">0.542</td>
-<td align="right">23.6</td>
-<td align="right">24.2</td>
-<td align="left">nd</td>
-<td align="right">34.1</td>
-<td align="right">2.41</td>
-<td align="right">42.7</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">-302.5</td>
-</tr>
-<tr class="odd">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">8</td>
-<td align="right">352.2</td>
-<td align="right">10.724</td>
-<td align="right">35.046</td>
-<td align="right">0.536</td>
-<td align="right">23.3</td>
-<td align="right">23.9</td>
-<td align="left">nd</td>
-<td align="right">34.6</td>
-<td align="right">2.44</td>
-<td align="right">44.3</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">-352.2</td>
-</tr>
-<tr class="even">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">7</td>
-<td align="right">401.9</td>
-<td align="right">10.379</td>
-<td align="right">35.041</td>
-<td align="right">0.481</td>
-<td align="right">20.9</td>
-<td align="right">21.5</td>
-<td align="left">nd</td>
-<td align="right">35.5</td>
-<td align="right">2.52</td>
-<td align="right">47.1</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">-401.9</td>
-</tr>
-<tr class="odd">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">6</td>
-<td align="right">401.8</td>
-<td align="right">10.379</td>
-<td align="right">35.041</td>
-<td align="right">0.477</td>
-<td align="right">20.8</td>
-<td align="right">21.3</td>
-<td align="left">nd</td>
-<td align="right">35.5</td>
-<td align="right">2.52</td>
-<td align="right">46.3</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">-401.8</td>
-</tr>
-<tr class="even">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">5</td>
-<td align="right">402.0</td>
-<td align="right">10.379</td>
-<td align="right">35.041</td>
-<td align="right">0.478</td>
-<td align="right">20.8</td>
-<td align="right">21.4</td>
-<td align="left">nd</td>
-<td align="right">35.5</td>
-<td align="right">2.52</td>
-<td align="right">46.1</td>
-<td align="right">0.00</td>
-<td align="right">0.07</td>
-<td align="right">-402.0</td>
-</tr>
-<tr class="odd">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">4</td>
-<td align="right">452.9</td>
-<td align="right">9.974</td>
-<td align="right">35.037</td>
-<td align="right">0.531</td>
-<td align="right">23.1</td>
-<td align="right">23.7</td>
-<td align="left">nd</td>
-<td align="right">35.8</td>
-<td align="right">2.56</td>
-<td align="right">48.4</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">-452.9</td>
-</tr>
-<tr class="even">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">3</td>
-<td align="right">503.4</td>
-<td align="right">9.606</td>
-<td align="right">35.031</td>
-<td align="right">0.459</td>
-<td align="right">20.0</td>
-<td align="right">20.5</td>
-<td align="left">nd</td>
-<td align="right">36.6</td>
-<td align="right">2.64</td>
-<td align="right">53.2</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">-503.4</td>
-</tr>
-<tr class="odd">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">2</td>
-<td align="right">502.8</td>
-<td align="right">9.609</td>
-<td align="right">35.031</td>
-<td align="right">0.461</td>
-<td align="right">20.1</td>
-<td align="right">20.6</td>
-<td align="left">nd</td>
-<td align="right">36.6</td>
-<td align="right">2.64</td>
-<td align="right">53.2</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">-502.8</td>
-</tr>
-<tr class="even">
-<td align="right">92111</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">19940921</td>
-<td align="right">11</td>
-<td align="right">5.687</td>
-<td align="right">87.965</td>
-<td align="right">1</td>
-<td align="right">502.8</td>
-<td align="right">9.609</td>
-<td align="right">35.032</td>
-<td align="right">0.460</td>
-<td align="right">20.0</td>
-<td align="right">20.5</td>
-<td align="left">nd</td>
-<td align="right">36.6</td>
-<td align="right">2.65</td>
-<td align="right">53.2</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">-502.8</td>
-</tr>
-</tbody>
-</table>
+data</code></pre>
+<pre><code>##    event sta cast     date time lat_begin lon_begin bot press   temp
+## 1  92111   1    1 19940921   11     5.687    87.965  24   0.7 28.397
+## 2  92111   1    1 19940921   11     5.687    87.965  23   0.7 28.399
+## 3  92111   1    1 19940921   11     5.687    87.965  22  26.2 28.145
+## 4  92111   1    1 19940921   11     5.687    87.965  21  51.3 28.052
+## 5  92111   1    1 19940921   11     5.687    87.965  20  75.9 26.386
+## 6  92111   1    1 19940921   11     5.687    87.965  19 101.2 21.500
+## 7  92111   1    1 19940921   11     5.687    87.965  18 101.3 21.450
+## 8  92111   1    1 19940921   11     5.687    87.965  17 101.2 21.337
+## 9  92111   1    1 19940921   11     5.687    87.965  16 151.1 13.812
+## 10 92111   1    1 19940921   11     5.687    87.965  15 201.5 13.141
+## 11 92111   1    1 19940921   11     5.687    87.965  14 201.7 13.141
+## 12 92111   1    1 19940921   11     5.687    87.965  13 202.0 13.135
+## 13 92111   1    1 19940921   11     5.687    87.965  12 252.0 11.979
+## 14 92111   1    1 19940921   11     5.687    87.965  11 302.4 11.201
+## 15 92111   1    1 19940921   11     5.687    87.965  10 302.2 11.204
+## 16 92111   1    1 19940921   11     5.687    87.965   9 302.5 11.202
+## 17 92111   1    1 19940921   11     5.687    87.965   8 352.2 10.724
+## 18 92111   1    1 19940921   11     5.687    87.965   7 401.9 10.379
+## 19 92111   1    1 19940921   11     5.687    87.965   6 401.8 10.379
+## 20 92111   1    1 19940921   11     5.687    87.965   5 402.0 10.379
+## 21 92111   1    1 19940921   11     5.687    87.965   4 452.9  9.974
+## 22 92111   1    1 19940921   11     5.687    87.965   3 503.4  9.606
+## 23 92111   1    1 19940921   11     5.687    87.965   2 502.8  9.609
+## 24 92111   1    1 19940921   11     5.687    87.965   1 502.8  9.609
+##    sal_bot O2_ml_L O2_umol_kg O2_umol_L O2_4  NO3  PO4 SiO4  NO2  NH4
+## 1   33.366   4.557      199.3     203.5   nd  0.1 0.08  2.9 0.00 0.00
+## 2   33.365   4.562      199.5     203.7   nd  0.1 0.08  2.9 0.00 0.00
+## 3   33.360   4.567      199.7     204.0   nd  0.1 0.10  2.9 0.00 0.10
+## 4   33.343   4.522      197.7     201.9   nd  0.1 0.10  2.9 0.01 0.09
+## 5   33.608   3.882      169.7     173.4   nd  2.8 0.36  5.5 0.43 0.17
+## 6   34.362   1.797       78.4      80.3   nd 18.3 1.35 18.8 0.04 0.02
+## 7   34.362   1.799       78.5      80.3   nd 18.5 1.36 18.8 0.04 0.01
+## 8   34.365   1.791       78.1      80.0   nd 18.5 1.36 19.0 0.04 0.08
+## 9   34.949   0.636       27.7      28.4   nd 30.5 2.17 34.2 0.01 0.01
+## 10  34.989   0.607       26.4      27.1   nd 31.5 2.24 35.5 0.00 0.02
+## 11  34.987   0.619       26.9      27.6   nd 31.5 2.24 35.5 0.00 0.00
+## 12  34.989   0.609       26.5      27.2   nd 31.6 2.24 35.5 0.00 0.00
+## 13  35.032   0.602       26.2      26.9   nd 32.7 2.31 37.4 0.00 0.02
+## 14  35.027   0.529       23.0      23.6   nd 34.1 2.42 42.6 0.00 0.00
+## 15  35.027   0.532       23.2      23.8   nd 34.1 2.41 42.6 0.00 0.00
+## 16  35.027   0.542       23.6      24.2   nd 34.1 2.41 42.7 0.00 0.00
+## 17  35.046   0.536       23.3      23.9   nd 34.6 2.44 44.3 0.00 0.00
+## 18  35.041   0.481       20.9      21.5   nd 35.5 2.52 47.1 0.00 0.00
+## 19  35.041   0.477       20.8      21.3   nd 35.5 2.52 46.3 0.00 0.00
+## 20  35.041   0.478       20.8      21.4   nd 35.5 2.52 46.1 0.00 0.07
+## 21  35.037   0.531       23.1      23.7   nd 35.8 2.56 48.4 0.00 0.00
+## 22  35.031   0.459       20.0      20.5   nd 36.6 2.64 53.2 0.00 0.00
+## 23  35.031   0.461       20.1      20.6   nd 36.6 2.64 53.2 0.00 0.00
+## 24  35.032   0.460       20.0      20.5   nd 36.6 2.65 53.2 0.00 0.00
+##     depth
+## 1    -0.7
+## 2    -0.7
+## 3   -26.2
+## 4   -51.3
+## 5   -75.9
+## 6  -101.2
+## 7  -101.3
+## 8  -101.2
+## 9  -151.1
+## 10 -201.5
+## 11 -201.7
+## 12 -202.0
+## 13 -252.0
+## 14 -302.4
+## 15 -302.2
+## 16 -302.5
+## 17 -352.2
+## 18 -401.9
+## 19 -401.8
+## 20 -402.0
+## 21 -452.9
+## 22 -503.4
+## 23 -502.8
+## 24 -502.8</code></pre>
 <p>Step 4: Generate figures for selected variable vs <code>press</code>. In Oceanography, <code>press</code> can be taken as depth.</p>
 <pre class="r"><code>plot_list = list()
 for (i in 16:18) {

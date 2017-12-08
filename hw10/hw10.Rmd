@@ -150,7 +150,7 @@ data <- read.table(text=txt_data,skip=1,col.names=c('event','sta', "cast", "date
 	"lon_begin", "bot", "press","temp", "sal_bot","O2_ml_L", "O2_umol_kg", "O2_umol_L", "O2_4", "NO3",
 	"PO4", "SiO4", "NO2", "NH4"))
 data$depth <- -data$press
-kable(data)
+data
 ```
 
 Step 4: Generate figures for selected variable vs `press`. In Oceanography, `press` can be taken as depth.
