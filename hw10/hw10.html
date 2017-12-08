@@ -143,7 +143,8 @@ $(document).ready(function () {
 <li>For Part 3, I noticed that the missing value was in <code>nd</code> on the website. In order to generate an empty figure if all values are missing, I should use <code>na.strings = &quot;nd&quot;</code> and then convert it to numeric form. This is because I cannot use <code>NA_integer_</code> or other similar code in <code>read.table()</code>.</li>
 <li>There is a bug of <code>ggplot()</code>. In the for loop, I used <code>ggplot(data=data, mapping=colnames(data)[j], y=&quot;depth&quot;))</code>. Yes, it is right logically but when <code>j</code> changes, the previous figure will also be changed. This is because even though the figure is generated and saved in <code>plot_list</code>, the figure is still linked with <code>j</code> and will change. Thus, in my first trial, all figures were the same except the axis names.</li>
 </ol>
-<p>Please note that the 6th to 10th figures are wrong. I do NOT know why this happend. I used the correct functions and all other figures are correct except these five.</p>
+<p>Overall, this homework is finished smoothly. Many problems occurred in Part 3 but they were solved finally. This work will benefit me a lot in doing my research based on big data set in Oceanography. In the future, I only need to change the top-level URL of the database and then all sub-datapage can be analyzed without downloading any files.</p>
+<p><strong>Please be patient when running codes in Part 3. Large dataset will be analyzed and it will take sometime.</strong></p>
 <p><strong>Useful resource</strong></p>
 <ol style="list-style-type: decimal">
 <li>Google</li>
@@ -236,10 +237,11 @@ result_Guangzhou &lt;- get_weather(&quot;Guangzhou&quot;,&quot;CN&quot;,&quot;7c
 result_Shenyang &lt;- get_weather(&quot;Shenyang&quot;,&quot;CN&quot;,&quot;7ce93051a99b9283279834f10c83f037&quot;)
 result_Changchun &lt;- get_weather(&quot;Changchun&quot;,&quot;CN&quot;,&quot;7ce93051a99b9283279834f10c83f037&quot;)
 result_Nanchang &lt;- get_weather(&quot;Nanchang&quot;,&quot;CN&quot;,&quot;7ce93051a99b9283279834f10c83f037&quot;)
-result_df &lt;- rbind(result_Beijing, result_Hangzhou, result_Shanghai, result_Xiamen, result_Chengdu, result_Harbin, 
-                    result_Tianjin, result_Shijiazhuang, result_Xian, result_Jinan, result_Zhenzhou, result_Guiyang,
-                    result_Wuhan, result_Changsha, result_Lanzhou, result_Kunming, result_Nanning, result_Guangzhou,
-                    result_Shenyang, result_Changchun, result_Nanchang)
+result_df &lt;- rbind(result_Beijing, result_Hangzhou, result_Shanghai, result_Xiamen, result_Chengdu,
+           result_Harbin, result_Tianjin, result_Shijiazhuang, result_Xian, result_Jinan,
+           result_Zhenzhou, result_Guiyang, result_Wuhan, result_Changsha, result_Lanzhou, 
+           result_Kunming, result_Nanning, result_Guangzhou, result_Shenyang, 
+           result_Changchun, result_Nanchang)
 kable(result_df)</code></pre>
 <table>
 <thead>
@@ -259,7 +261,7 @@ kable(result_df)</code></pre>
 <td align="right">116.40</td>
 <td align="right">39.91</td>
 <td align="left">clear sky</td>
-<td align="right">269.150</td>
+<td align="right">280.150</td>
 </tr>
 <tr class="even">
 <td align="left">Hangzhou</td>
@@ -267,7 +269,7 @@ kable(result_df)</code></pre>
 <td align="right">120.16</td>
 <td align="right">30.29</td>
 <td align="left">clear sky</td>
-<td align="right">280.150</td>
+<td align="right">281.150</td>
 </tr>
 <tr class="odd">
 <td align="left">Shanghai</td>
@@ -275,7 +277,7 @@ kable(result_df)</code></pre>
 <td align="right">121.46</td>
 <td align="right">31.22</td>
 <td align="left">clear sky</td>
-<td align="right">278.150</td>
+<td align="right">281.680</td>
 </tr>
 <tr class="even">
 <td align="left">Xiamen</td>
@@ -283,23 +285,23 @@ kable(result_df)</code></pre>
 <td align="right">118.08</td>
 <td align="right">24.48</td>
 <td align="left">clear sky</td>
-<td align="right">285.150</td>
+<td align="right">292.150</td>
 </tr>
 <tr class="odd">
 <td align="left">Chengdu</td>
 <td align="left">CN</td>
 <td align="right">104.07</td>
 <td align="right">30.67</td>
-<td align="left">broken clouds</td>
-<td align="right">281.150</td>
+<td align="left">clear sky</td>
+<td align="right">288.150</td>
 </tr>
 <tr class="even">
 <td align="left">Harbin</td>
 <td align="left">CN</td>
 <td align="right">126.65</td>
 <td align="right">45.75</td>
-<td align="left">few clouds</td>
-<td align="right">253.150</td>
+<td align="left">light snow</td>
+<td align="right">262.150</td>
 </tr>
 <tr class="odd">
 <td align="left">Tianjin</td>
@@ -307,7 +309,7 @@ kable(result_df)</code></pre>
 <td align="right">117.18</td>
 <td align="right">39.14</td>
 <td align="left">clear sky</td>
-<td align="right">269.150</td>
+<td align="right">279.150</td>
 </tr>
 <tr class="even">
 <td align="left">Shijiazhuang</td>
@@ -315,7 +317,7 @@ kable(result_df)</code></pre>
 <td align="right">114.48</td>
 <td align="right">38.04</td>
 <td align="left">clear sky</td>
-<td align="right">268.150</td>
+<td align="right">282.150</td>
 </tr>
 <tr class="odd">
 <td align="left">Xian</td>
@@ -323,7 +325,7 @@ kable(result_df)</code></pre>
 <td align="right">108.93</td>
 <td align="right">34.26</td>
 <td align="left">clear sky</td>
-<td align="right">267.150</td>
+<td align="right">279.150</td>
 </tr>
 <tr class="even">
 <td align="left">Jinan</td>
@@ -331,15 +333,15 @@ kable(result_df)</code></pre>
 <td align="right">117.00</td>
 <td align="right">36.67</td>
 <td align="left">clear sky</td>
-<td align="right">260.752</td>
+<td align="right">278.583</td>
 </tr>
 <tr class="odd">
 <td align="left">Zhenzhou</td>
 <td align="left">CN</td>
 <td align="right">119.18</td>
 <td align="right">32.27</td>
-<td align="left">mist</td>
-<td align="right">276.150</td>
+<td align="left">clear sky</td>
+<td align="right">280.150</td>
 </tr>
 <tr class="even">
 <td align="left">Guiyang</td>
@@ -347,15 +349,15 @@ kable(result_df)</code></pre>
 <td align="right">106.72</td>
 <td align="right">26.58</td>
 <td align="left">overcast clouds</td>
-<td align="right">277.150</td>
+<td align="right">278.150</td>
 </tr>
 <tr class="odd">
 <td align="left">Wuhan</td>
 <td align="left">CN</td>
 <td align="right">114.27</td>
 <td align="right">30.58</td>
-<td align="left">haze</td>
-<td align="right">278.150</td>
+<td align="left">clear sky</td>
+<td align="right">283.150</td>
 </tr>
 <tr class="even">
 <td align="left">Changsha</td>
@@ -363,7 +365,7 @@ kable(result_df)</code></pre>
 <td align="right">112.97</td>
 <td align="right">28.20</td>
 <td align="left">clear sky</td>
-<td align="right">280.150</td>
+<td align="right">286.150</td>
 </tr>
 <tr class="odd">
 <td align="left">Lanzhou</td>
@@ -371,7 +373,7 @@ kable(result_df)</code></pre>
 <td align="right">103.79</td>
 <td align="right">36.06</td>
 <td align="left">clear sky</td>
-<td align="right">259.150</td>
+<td align="right">271.150</td>
 </tr>
 <tr class="even">
 <td align="left">Kunming</td>
@@ -386,8 +388,8 @@ kable(result_df)</code></pre>
 <td align="left">CN</td>
 <td align="right">108.32</td>
 <td align="right">22.82</td>
-<td align="left">haze</td>
-<td align="right">289.150</td>
+<td align="left">broken clouds</td>
+<td align="right">290.150</td>
 </tr>
 <tr class="even">
 <td align="left">Guangzhou</td>
@@ -395,23 +397,23 @@ kable(result_df)</code></pre>
 <td align="right">113.25</td>
 <td align="right">23.12</td>
 <td align="left">clear sky</td>
-<td align="right">288.150</td>
+<td align="right">293.150</td>
 </tr>
 <tr class="odd">
 <td align="left">Shenyang</td>
 <td align="left">CN</td>
 <td align="right">123.43</td>
 <td align="right">41.79</td>
-<td align="left">few clouds</td>
-<td align="right">257.150</td>
+<td align="left">clear sky</td>
+<td align="right">272.150</td>
 </tr>
 <tr class="even">
 <td align="left">Changchun</td>
 <td align="left">CN</td>
 <td align="right">125.32</td>
 <td align="right">43.88</td>
-<td align="left">smoke</td>
-<td align="right">256.150</td>
+<td align="left">light snow</td>
+<td align="right">263.150</td>
 </tr>
 <tr class="odd">
 <td align="left">Nanchang</td>
@@ -419,7 +421,7 @@ kable(result_df)</code></pre>
 <td align="right">115.88</td>
 <td align="right">28.68</td>
 <td align="left">clear sky</td>
-<td align="right">279.277</td>
+<td align="right">282.758</td>
 </tr>
 </tbody>
 </table>
@@ -428,14 +430,14 @@ kable(result_df)</code></pre>
 <pre class="r"><code>leaflet() %&gt;%
         addTiles() %&gt;%
         addMarkers(lng=result_df$coord.lon, lat=result_df$coord.lat, popup=result_df$weather.description)</code></pre>
-<div id="htmlwidget-600ca87bbe163047a9ac" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-600ca87bbe163047a9ac">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[39.91,30.29,31.22,24.48,30.67,45.75,39.14,38.04,34.26,36.67,32.27,26.58,30.58,28.2,36.06,25.04,22.82,23.12,41.79,43.88,28.68],[116.4,120.16,121.46,118.08,104.07,126.65,117.18,114.48,108.93,117,119.18,106.72,114.27,112.97,103.79,102.72,108.32,113.25,123.43,125.32,115.88],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["clear sky","clear sky","clear sky","clear sky","broken clouds","few clouds","clear sky","clear sky","clear sky","clear sky","mist","overcast clouds","haze","clear sky","clear sky","mist","haze","clear sky","few clouds","smoke","clear sky"],null,null,null,null,null,null]}],"limits":{"lat":[22.82,45.75],"lng":[102.72,126.65]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-189fb02ad5b1e19b8ecd" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-189fb02ad5b1e19b8ecd">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[39.91,30.29,31.22,24.48,30.67,45.75,39.14,38.04,34.26,36.67,32.27,26.58,30.58,28.2,36.06,25.04,22.82,23.12,41.79,43.88,28.68],[116.4,120.16,121.46,118.08,104.07,126.65,117.18,114.48,108.93,117,119.18,106.72,114.27,112.97,103.79,102.72,108.32,113.25,123.43,125.32,115.88],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["clear sky","clear sky","clear sky","clear sky","clear sky","light snow","clear sky","clear sky","clear sky","clear sky","clear sky","overcast clouds","clear sky","clear sky","clear sky","mist","broken clouds","clear sky","clear sky","light snow","clear sky"],null,null,null,null,null,null]}],"limits":{"lat":[22.82,45.75],"lng":[102.72,126.65]}},"evals":[],"jsHooks":[]}</script>
 <p>Step 4: Modify the function with a for loop.</p>
-<p>It is a waste of time to get data one by one. I would like to enter all cities once and call the function only once. <strong>This work is only designed for Chinese cities with a weather map, so the country code is only “CN”. If you want to use this for other countries, the function needs to be modified slightly.</strong></p>
-<pre class="r"><code>all_result &lt;- data.frame(matrix(ncol = 6, nrow = 0))
-col_name &lt;- c(&quot;name&quot;, &quot;sys.country&quot;, &quot;coord.lon&quot;, &quot;coord.lat&quot;, &quot;weather.description&quot;, &quot;main.temp&quot;)
-colnames(all_result) &lt;- col_name
-get_weather_2 &lt;- function(city_name, country_code, API_key) {
+<p>It is a waste of time to get data one by one. I would like to enter all cities once and call the function only once. <strong>This work is only designed for Chinese cities with a weather map (single country), so the country code is only “CN”. If you want to use this for more than one countries, the function needs to be modified slightly.</strong></p>
+<pre class="r"><code>get_weather_2 &lt;- function(city_name, country_code, API_key) {
+    all_result &lt;- data.frame(matrix(ncol = 6, nrow = 0))
+    col_name &lt;- c(&quot;name&quot;, &quot;sys.country&quot;, &quot;coord.lon&quot;, &quot;coord.lat&quot;, &quot;weather.description&quot;, &quot;main.temp&quot;)
+    colnames(all_result) &lt;- col_name
         for (i in 1:length(city_name)){
                 query_string&lt;-glue(&quot;api.openweathermap.org/data/2.5/weather?q={city_name[i]},{country_code}&amp;APPID={API_key}&quot;)
                 weather_result &lt;- GET(query_string)
@@ -447,9 +449,9 @@ get_weather_2 &lt;- function(city_name, country_code, API_key) {
     return(all_result)
 }</code></pre>
 <p>Let’s have a try, getting a full results and an interactive map.</p>
-<pre class="r"><code>city &lt;- c(&quot;Beijing&quot;,&quot;Hangzhou&quot;,&quot;Shanghai&quot;,&quot;Xiamen&quot;,&quot;Chengdu&quot;,&quot;Harbin&quot;,&quot;Tianjin&quot;,&quot;Shijiazhuang&quot;,&quot;Xian&quot;,&quot;Jinan&quot;,
-          &quot;Zhenzhou&quot;,&quot;Wuhan&quot;,&quot;Guiyang&quot;,&quot;Changsha&quot;,&quot;Lanzhou&quot;,&quot;Kunming&quot;,&quot;Nanning&quot;,&quot;Guangzhou&quot;,&quot;Shenyang&quot;,&quot;Changchun&quot;,
-          &quot;Nanchang&quot;)
+<pre class="r"><code>city &lt;- c(&quot;Beijing&quot;,&quot;Hangzhou&quot;,&quot;Shanghai&quot;,&quot;Xiamen&quot;,&quot;Chengdu&quot;,&quot;Harbin&quot;,&quot;Tianjin&quot;,&quot;Shijiazhuang&quot;,&quot;Xian&quot;,
+      &quot;Jinan&quot;,&quot;Zhenzhou&quot;,&quot;Wuhan&quot;,&quot;Guiyang&quot;,&quot;Changsha&quot;,&quot;Lanzhou&quot;,&quot;Kunming&quot;,&quot;Nanning&quot;,&quot;Guangzhou&quot;,
+      &quot;Shenyang&quot;,&quot;Changchun&quot;,&quot;Nanchang&quot;)
 weather_all_city &lt;- get_weather_2(city,&quot;CN&quot;,&quot;7ce93051a99b9283279834f10c83f037&quot;)
 kable(weather_all_city)</code></pre>
 <table>
@@ -470,7 +472,7 @@ kable(weather_all_city)</code></pre>
 <td align="right">116.40</td>
 <td align="right">39.91</td>
 <td align="left">clear sky</td>
-<td align="right">269.150</td>
+<td align="right">280.150</td>
 </tr>
 <tr class="even">
 <td align="left">Hangzhou</td>
@@ -478,7 +480,7 @@ kable(weather_all_city)</code></pre>
 <td align="right">120.16</td>
 <td align="right">30.29</td>
 <td align="left">clear sky</td>
-<td align="right">280.150</td>
+<td align="right">281.150</td>
 </tr>
 <tr class="odd">
 <td align="left">Shanghai</td>
@@ -486,7 +488,7 @@ kable(weather_all_city)</code></pre>
 <td align="right">121.46</td>
 <td align="right">31.22</td>
 <td align="left">clear sky</td>
-<td align="right">278.150</td>
+<td align="right">281.680</td>
 </tr>
 <tr class="even">
 <td align="left">Xiamen</td>
@@ -494,23 +496,23 @@ kable(weather_all_city)</code></pre>
 <td align="right">118.08</td>
 <td align="right">24.48</td>
 <td align="left">clear sky</td>
-<td align="right">285.150</td>
+<td align="right">292.150</td>
 </tr>
 <tr class="odd">
 <td align="left">Chengdu</td>
 <td align="left">CN</td>
 <td align="right">104.07</td>
 <td align="right">30.67</td>
-<td align="left">broken clouds</td>
-<td align="right">281.150</td>
+<td align="left">clear sky</td>
+<td align="right">288.150</td>
 </tr>
 <tr class="even">
 <td align="left">Harbin</td>
 <td align="left">CN</td>
 <td align="right">126.65</td>
 <td align="right">45.75</td>
-<td align="left">few clouds</td>
-<td align="right">253.150</td>
+<td align="left">light snow</td>
+<td align="right">262.150</td>
 </tr>
 <tr class="odd">
 <td align="left">Tianjin</td>
@@ -518,7 +520,7 @@ kable(weather_all_city)</code></pre>
 <td align="right">117.18</td>
 <td align="right">39.14</td>
 <td align="left">clear sky</td>
-<td align="right">269.150</td>
+<td align="right">279.150</td>
 </tr>
 <tr class="even">
 <td align="left">Shijiazhuang</td>
@@ -526,7 +528,7 @@ kable(weather_all_city)</code></pre>
 <td align="right">114.48</td>
 <td align="right">38.04</td>
 <td align="left">clear sky</td>
-<td align="right">268.150</td>
+<td align="right">282.150</td>
 </tr>
 <tr class="odd">
 <td align="left">Xian</td>
@@ -534,7 +536,7 @@ kable(weather_all_city)</code></pre>
 <td align="right">108.93</td>
 <td align="right">34.26</td>
 <td align="left">clear sky</td>
-<td align="right">267.150</td>
+<td align="right">279.150</td>
 </tr>
 <tr class="even">
 <td align="left">Jinan</td>
@@ -542,23 +544,23 @@ kable(weather_all_city)</code></pre>
 <td align="right">117.00</td>
 <td align="right">36.67</td>
 <td align="left">clear sky</td>
-<td align="right">260.752</td>
+<td align="right">278.583</td>
 </tr>
 <tr class="odd">
 <td align="left">Zhenzhou</td>
 <td align="left">CN</td>
 <td align="right">119.18</td>
 <td align="right">32.27</td>
-<td align="left">mist</td>
-<td align="right">276.150</td>
+<td align="left">clear sky</td>
+<td align="right">280.150</td>
 </tr>
 <tr class="even">
 <td align="left">Wuhan</td>
 <td align="left">CN</td>
 <td align="right">114.27</td>
 <td align="right">30.58</td>
-<td align="left">haze</td>
-<td align="right">278.150</td>
+<td align="left">clear sky</td>
+<td align="right">283.150</td>
 </tr>
 <tr class="odd">
 <td align="left">Guiyang</td>
@@ -566,7 +568,7 @@ kable(weather_all_city)</code></pre>
 <td align="right">106.72</td>
 <td align="right">26.58</td>
 <td align="left">overcast clouds</td>
-<td align="right">277.150</td>
+<td align="right">278.150</td>
 </tr>
 <tr class="even">
 <td align="left">Changsha</td>
@@ -574,7 +576,7 @@ kable(weather_all_city)</code></pre>
 <td align="right">112.97</td>
 <td align="right">28.20</td>
 <td align="left">clear sky</td>
-<td align="right">280.150</td>
+<td align="right">286.150</td>
 </tr>
 <tr class="odd">
 <td align="left">Lanzhou</td>
@@ -582,7 +584,7 @@ kable(weather_all_city)</code></pre>
 <td align="right">103.79</td>
 <td align="right">36.06</td>
 <td align="left">clear sky</td>
-<td align="right">259.150</td>
+<td align="right">271.150</td>
 </tr>
 <tr class="even">
 <td align="left">Kunming</td>
@@ -597,8 +599,8 @@ kable(weather_all_city)</code></pre>
 <td align="left">CN</td>
 <td align="right">108.32</td>
 <td align="right">22.82</td>
-<td align="left">haze</td>
-<td align="right">289.150</td>
+<td align="left">broken clouds</td>
+<td align="right">290.150</td>
 </tr>
 <tr class="even">
 <td align="left">Guangzhou</td>
@@ -606,23 +608,23 @@ kable(weather_all_city)</code></pre>
 <td align="right">113.25</td>
 <td align="right">23.12</td>
 <td align="left">clear sky</td>
-<td align="right">288.150</td>
+<td align="right">293.150</td>
 </tr>
 <tr class="odd">
 <td align="left">Shenyang</td>
 <td align="left">CN</td>
 <td align="right">123.43</td>
 <td align="right">41.79</td>
-<td align="left">few clouds</td>
-<td align="right">257.150</td>
+<td align="left">clear sky</td>
+<td align="right">272.150</td>
 </tr>
 <tr class="even">
 <td align="left">Changchun</td>
 <td align="left">CN</td>
 <td align="right">125.32</td>
 <td align="right">43.88</td>
-<td align="left">smoke</td>
-<td align="right">256.150</td>
+<td align="left">light snow</td>
+<td align="right">263.150</td>
 </tr>
 <tr class="odd">
 <td align="left">Nanchang</td>
@@ -630,7 +632,7 @@ kable(weather_all_city)</code></pre>
 <td align="right">115.88</td>
 <td align="right">28.68</td>
 <td align="left">clear sky</td>
-<td align="right">279.277</td>
+<td align="right">282.758</td>
 </tr>
 </tbody>
 </table>
@@ -638,8 +640,8 @@ kable(weather_all_city)</code></pre>
         addTiles() %&gt;%
         addMarkers(lng=weather_all_city$coord.lon, lat=weather_all_city$coord.lat,
                    popup=weather_all_city$weather.description)</code></pre>
-<div id="htmlwidget-a662f7b2bc63a9f36bb5" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a662f7b2bc63a9f36bb5">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[39.91,30.29,31.22,24.48,30.67,45.75,39.14,38.04,34.26,36.67,32.27,30.58,26.58,28.2,36.06,25.04,22.82,23.12,41.79,43.88,28.68],[116.4,120.16,121.46,118.08,104.07,126.65,117.18,114.48,108.93,117,119.18,114.27,106.72,112.97,103.79,102.72,108.32,113.25,123.43,125.32,115.88],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["clear sky","clear sky","clear sky","clear sky","broken clouds","few clouds","clear sky","clear sky","clear sky","clear sky","mist","haze","overcast clouds","clear sky","clear sky","mist","haze","clear sky","few clouds","smoke","clear sky"],null,null,null,null,null,null]}],"limits":{"lat":[22.82,45.75],"lng":[102.72,126.65]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-f8a9313fc02eca68aae3" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f8a9313fc02eca68aae3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[39.91,30.29,31.22,24.48,30.67,45.75,39.14,38.04,34.26,36.67,32.27,30.58,26.58,28.2,36.06,25.04,22.82,23.12,41.79,43.88,28.68],[116.4,120.16,121.46,118.08,104.07,126.65,117.18,114.48,108.93,117,119.18,114.27,106.72,112.97,103.79,102.72,108.32,113.25,123.43,125.32,115.88],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["clear sky","clear sky","clear sky","clear sky","clear sky","light snow","clear sky","clear sky","clear sky","clear sky","clear sky","clear sky","overcast clouds","clear sky","clear sky","mist","broken clouds","clear sky","clear sky","light snow","clear sky"],null,null,null,null,null,null]}],"limits":{"lat":[22.82,45.75],"lng":[102.72,126.65]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="part-2-analyze-oceanographic-data-jgofs-from-single-webpage" class="section level1">
 <h1>Part 2: Analyze oceanographic data (JGOFS) from single webpage</h1>
@@ -649,87 +651,593 @@ page_title &lt;- read_html(url)</code></pre>
 <p>Step 2: Extract the data in the text form.</p>
 <pre class="r"><code>txt_data &lt;- xml_text(page_title)</code></pre>
 <p>Step 3: Convert the text data into a dataframe.</p>
-<pre class="r"><code>data &lt;- read.table(text=txt_data,skip=1,col.names=c('event','sta', &quot;cast&quot;, &quot;date&quot;, &quot;time&quot;, &quot;lat_begin&quot;, &quot;lon_begin&quot;,
-                                                    &quot;bot&quot;, &quot;press&quot;,&quot;temp&quot;, &quot;sal_bot&quot;,&quot;O2_ml_L&quot;, &quot;O2_umol_kg&quot;,
-                                                    &quot;O2_umol_L&quot;, &quot;O2_4&quot;, &quot;NO3&quot;, &quot;PO4&quot;, &quot;SiO4&quot;, &quot;NO2&quot;, &quot;NH4&quot;))
+<pre class="r"><code>data &lt;- read.table(text=txt_data,skip=1,col.names=c('event','sta', &quot;cast&quot;, &quot;date&quot;, &quot;time&quot;, &quot;lat_begin&quot;,
+    &quot;lon_begin&quot;, &quot;bot&quot;, &quot;press&quot;,&quot;temp&quot;, &quot;sal_bot&quot;,&quot;O2_ml_L&quot;, &quot;O2_umol_kg&quot;, &quot;O2_umol_L&quot;, &quot;O2_4&quot;, &quot;NO3&quot;,
+    &quot;PO4&quot;, &quot;SiO4&quot;, &quot;NO2&quot;, &quot;NH4&quot;))
 data$depth &lt;- -data$press
-data</code></pre>
-<pre><code>##    event sta cast     date time lat_begin lon_begin bot press   temp
-## 1  92111   1    1 19940921   11     5.687    87.965  24   0.7 28.397
-## 2  92111   1    1 19940921   11     5.687    87.965  23   0.7 28.399
-## 3  92111   1    1 19940921   11     5.687    87.965  22  26.2 28.145
-## 4  92111   1    1 19940921   11     5.687    87.965  21  51.3 28.052
-## 5  92111   1    1 19940921   11     5.687    87.965  20  75.9 26.386
-## 6  92111   1    1 19940921   11     5.687    87.965  19 101.2 21.500
-## 7  92111   1    1 19940921   11     5.687    87.965  18 101.3 21.450
-## 8  92111   1    1 19940921   11     5.687    87.965  17 101.2 21.337
-## 9  92111   1    1 19940921   11     5.687    87.965  16 151.1 13.812
-## 10 92111   1    1 19940921   11     5.687    87.965  15 201.5 13.141
-## 11 92111   1    1 19940921   11     5.687    87.965  14 201.7 13.141
-## 12 92111   1    1 19940921   11     5.687    87.965  13 202.0 13.135
-## 13 92111   1    1 19940921   11     5.687    87.965  12 252.0 11.979
-## 14 92111   1    1 19940921   11     5.687    87.965  11 302.4 11.201
-## 15 92111   1    1 19940921   11     5.687    87.965  10 302.2 11.204
-## 16 92111   1    1 19940921   11     5.687    87.965   9 302.5 11.202
-## 17 92111   1    1 19940921   11     5.687    87.965   8 352.2 10.724
-## 18 92111   1    1 19940921   11     5.687    87.965   7 401.9 10.379
-## 19 92111   1    1 19940921   11     5.687    87.965   6 401.8 10.379
-## 20 92111   1    1 19940921   11     5.687    87.965   5 402.0 10.379
-## 21 92111   1    1 19940921   11     5.687    87.965   4 452.9  9.974
-## 22 92111   1    1 19940921   11     5.687    87.965   3 503.4  9.606
-## 23 92111   1    1 19940921   11     5.687    87.965   2 502.8  9.609
-## 24 92111   1    1 19940921   11     5.687    87.965   1 502.8  9.609
-##    sal_bot O2_ml_L O2_umol_kg O2_umol_L O2_4  NO3  PO4 SiO4  NO2  NH4
-## 1   33.366   4.557      199.3     203.5   nd  0.1 0.08  2.9 0.00 0.00
-## 2   33.365   4.562      199.5     203.7   nd  0.1 0.08  2.9 0.00 0.00
-## 3   33.360   4.567      199.7     204.0   nd  0.1 0.10  2.9 0.00 0.10
-## 4   33.343   4.522      197.7     201.9   nd  0.1 0.10  2.9 0.01 0.09
-## 5   33.608   3.882      169.7     173.4   nd  2.8 0.36  5.5 0.43 0.17
-## 6   34.362   1.797       78.4      80.3   nd 18.3 1.35 18.8 0.04 0.02
-## 7   34.362   1.799       78.5      80.3   nd 18.5 1.36 18.8 0.04 0.01
-## 8   34.365   1.791       78.1      80.0   nd 18.5 1.36 19.0 0.04 0.08
-## 9   34.949   0.636       27.7      28.4   nd 30.5 2.17 34.2 0.01 0.01
-## 10  34.989   0.607       26.4      27.1   nd 31.5 2.24 35.5 0.00 0.02
-## 11  34.987   0.619       26.9      27.6   nd 31.5 2.24 35.5 0.00 0.00
-## 12  34.989   0.609       26.5      27.2   nd 31.6 2.24 35.5 0.00 0.00
-## 13  35.032   0.602       26.2      26.9   nd 32.7 2.31 37.4 0.00 0.02
-## 14  35.027   0.529       23.0      23.6   nd 34.1 2.42 42.6 0.00 0.00
-## 15  35.027   0.532       23.2      23.8   nd 34.1 2.41 42.6 0.00 0.00
-## 16  35.027   0.542       23.6      24.2   nd 34.1 2.41 42.7 0.00 0.00
-## 17  35.046   0.536       23.3      23.9   nd 34.6 2.44 44.3 0.00 0.00
-## 18  35.041   0.481       20.9      21.5   nd 35.5 2.52 47.1 0.00 0.00
-## 19  35.041   0.477       20.8      21.3   nd 35.5 2.52 46.3 0.00 0.00
-## 20  35.041   0.478       20.8      21.4   nd 35.5 2.52 46.1 0.00 0.07
-## 21  35.037   0.531       23.1      23.7   nd 35.8 2.56 48.4 0.00 0.00
-## 22  35.031   0.459       20.0      20.5   nd 36.6 2.64 53.2 0.00 0.00
-## 23  35.031   0.461       20.1      20.6   nd 36.6 2.64 53.2 0.00 0.00
-## 24  35.032   0.460       20.0      20.5   nd 36.6 2.65 53.2 0.00 0.00
-##     depth
-## 1    -0.7
-## 2    -0.7
-## 3   -26.2
-## 4   -51.3
-## 5   -75.9
-## 6  -101.2
-## 7  -101.3
-## 8  -101.2
-## 9  -151.1
-## 10 -201.5
-## 11 -201.7
-## 12 -202.0
-## 13 -252.0
-## 14 -302.4
-## 15 -302.2
-## 16 -302.5
-## 17 -352.2
-## 18 -401.9
-## 19 -401.8
-## 20 -402.0
-## 21 -452.9
-## 22 -503.4
-## 23 -502.8
-## 24 -502.8</code></pre>
-<p>Step 4: Generate figures for selected variable vs <code>press</code>. <code>press</code> can be taken as depth.</p>
+kable(data)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">event</th>
+<th align="right">sta</th>
+<th align="right">cast</th>
+<th align="right">date</th>
+<th align="right">time</th>
+<th align="right">lat_begin</th>
+<th align="right">lon_begin</th>
+<th align="right">bot</th>
+<th align="right">press</th>
+<th align="right">temp</th>
+<th align="right">sal_bot</th>
+<th align="right">O2_ml_L</th>
+<th align="right">O2_umol_kg</th>
+<th align="right">O2_umol_L</th>
+<th align="left">O2_4</th>
+<th align="right">NO3</th>
+<th align="right">PO4</th>
+<th align="right">SiO4</th>
+<th align="right">NO2</th>
+<th align="right">NH4</th>
+<th align="right">depth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">24</td>
+<td align="right">0.7</td>
+<td align="right">28.397</td>
+<td align="right">33.366</td>
+<td align="right">4.557</td>
+<td align="right">199.3</td>
+<td align="right">203.5</td>
+<td align="left">nd</td>
+<td align="right">0.1</td>
+<td align="right">0.08</td>
+<td align="right">2.9</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-0.7</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">23</td>
+<td align="right">0.7</td>
+<td align="right">28.399</td>
+<td align="right">33.365</td>
+<td align="right">4.562</td>
+<td align="right">199.5</td>
+<td align="right">203.7</td>
+<td align="left">nd</td>
+<td align="right">0.1</td>
+<td align="right">0.08</td>
+<td align="right">2.9</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-0.7</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">22</td>
+<td align="right">26.2</td>
+<td align="right">28.145</td>
+<td align="right">33.360</td>
+<td align="right">4.567</td>
+<td align="right">199.7</td>
+<td align="right">204.0</td>
+<td align="left">nd</td>
+<td align="right">0.1</td>
+<td align="right">0.10</td>
+<td align="right">2.9</td>
+<td align="right">0.00</td>
+<td align="right">0.10</td>
+<td align="right">-26.2</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">21</td>
+<td align="right">51.3</td>
+<td align="right">28.052</td>
+<td align="right">33.343</td>
+<td align="right">4.522</td>
+<td align="right">197.7</td>
+<td align="right">201.9</td>
+<td align="left">nd</td>
+<td align="right">0.1</td>
+<td align="right">0.10</td>
+<td align="right">2.9</td>
+<td align="right">0.01</td>
+<td align="right">0.09</td>
+<td align="right">-51.3</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">20</td>
+<td align="right">75.9</td>
+<td align="right">26.386</td>
+<td align="right">33.608</td>
+<td align="right">3.882</td>
+<td align="right">169.7</td>
+<td align="right">173.4</td>
+<td align="left">nd</td>
+<td align="right">2.8</td>
+<td align="right">0.36</td>
+<td align="right">5.5</td>
+<td align="right">0.43</td>
+<td align="right">0.17</td>
+<td align="right">-75.9</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">19</td>
+<td align="right">101.2</td>
+<td align="right">21.500</td>
+<td align="right">34.362</td>
+<td align="right">1.797</td>
+<td align="right">78.4</td>
+<td align="right">80.3</td>
+<td align="left">nd</td>
+<td align="right">18.3</td>
+<td align="right">1.35</td>
+<td align="right">18.8</td>
+<td align="right">0.04</td>
+<td align="right">0.02</td>
+<td align="right">-101.2</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">18</td>
+<td align="right">101.3</td>
+<td align="right">21.450</td>
+<td align="right">34.362</td>
+<td align="right">1.799</td>
+<td align="right">78.5</td>
+<td align="right">80.3</td>
+<td align="left">nd</td>
+<td align="right">18.5</td>
+<td align="right">1.36</td>
+<td align="right">18.8</td>
+<td align="right">0.04</td>
+<td align="right">0.01</td>
+<td align="right">-101.3</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">17</td>
+<td align="right">101.2</td>
+<td align="right">21.337</td>
+<td align="right">34.365</td>
+<td align="right">1.791</td>
+<td align="right">78.1</td>
+<td align="right">80.0</td>
+<td align="left">nd</td>
+<td align="right">18.5</td>
+<td align="right">1.36</td>
+<td align="right">19.0</td>
+<td align="right">0.04</td>
+<td align="right">0.08</td>
+<td align="right">-101.2</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">16</td>
+<td align="right">151.1</td>
+<td align="right">13.812</td>
+<td align="right">34.949</td>
+<td align="right">0.636</td>
+<td align="right">27.7</td>
+<td align="right">28.4</td>
+<td align="left">nd</td>
+<td align="right">30.5</td>
+<td align="right">2.17</td>
+<td align="right">34.2</td>
+<td align="right">0.01</td>
+<td align="right">0.01</td>
+<td align="right">-151.1</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">15</td>
+<td align="right">201.5</td>
+<td align="right">13.141</td>
+<td align="right">34.989</td>
+<td align="right">0.607</td>
+<td align="right">26.4</td>
+<td align="right">27.1</td>
+<td align="left">nd</td>
+<td align="right">31.5</td>
+<td align="right">2.24</td>
+<td align="right">35.5</td>
+<td align="right">0.00</td>
+<td align="right">0.02</td>
+<td align="right">-201.5</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">14</td>
+<td align="right">201.7</td>
+<td align="right">13.141</td>
+<td align="right">34.987</td>
+<td align="right">0.619</td>
+<td align="right">26.9</td>
+<td align="right">27.6</td>
+<td align="left">nd</td>
+<td align="right">31.5</td>
+<td align="right">2.24</td>
+<td align="right">35.5</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-201.7</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">13</td>
+<td align="right">202.0</td>
+<td align="right">13.135</td>
+<td align="right">34.989</td>
+<td align="right">0.609</td>
+<td align="right">26.5</td>
+<td align="right">27.2</td>
+<td align="left">nd</td>
+<td align="right">31.6</td>
+<td align="right">2.24</td>
+<td align="right">35.5</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-202.0</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">12</td>
+<td align="right">252.0</td>
+<td align="right">11.979</td>
+<td align="right">35.032</td>
+<td align="right">0.602</td>
+<td align="right">26.2</td>
+<td align="right">26.9</td>
+<td align="left">nd</td>
+<td align="right">32.7</td>
+<td align="right">2.31</td>
+<td align="right">37.4</td>
+<td align="right">0.00</td>
+<td align="right">0.02</td>
+<td align="right">-252.0</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">11</td>
+<td align="right">302.4</td>
+<td align="right">11.201</td>
+<td align="right">35.027</td>
+<td align="right">0.529</td>
+<td align="right">23.0</td>
+<td align="right">23.6</td>
+<td align="left">nd</td>
+<td align="right">34.1</td>
+<td align="right">2.42</td>
+<td align="right">42.6</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-302.4</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">10</td>
+<td align="right">302.2</td>
+<td align="right">11.204</td>
+<td align="right">35.027</td>
+<td align="right">0.532</td>
+<td align="right">23.2</td>
+<td align="right">23.8</td>
+<td align="left">nd</td>
+<td align="right">34.1</td>
+<td align="right">2.41</td>
+<td align="right">42.6</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-302.2</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">9</td>
+<td align="right">302.5</td>
+<td align="right">11.202</td>
+<td align="right">35.027</td>
+<td align="right">0.542</td>
+<td align="right">23.6</td>
+<td align="right">24.2</td>
+<td align="left">nd</td>
+<td align="right">34.1</td>
+<td align="right">2.41</td>
+<td align="right">42.7</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-302.5</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">8</td>
+<td align="right">352.2</td>
+<td align="right">10.724</td>
+<td align="right">35.046</td>
+<td align="right">0.536</td>
+<td align="right">23.3</td>
+<td align="right">23.9</td>
+<td align="left">nd</td>
+<td align="right">34.6</td>
+<td align="right">2.44</td>
+<td align="right">44.3</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-352.2</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">7</td>
+<td align="right">401.9</td>
+<td align="right">10.379</td>
+<td align="right">35.041</td>
+<td align="right">0.481</td>
+<td align="right">20.9</td>
+<td align="right">21.5</td>
+<td align="left">nd</td>
+<td align="right">35.5</td>
+<td align="right">2.52</td>
+<td align="right">47.1</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-401.9</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">6</td>
+<td align="right">401.8</td>
+<td align="right">10.379</td>
+<td align="right">35.041</td>
+<td align="right">0.477</td>
+<td align="right">20.8</td>
+<td align="right">21.3</td>
+<td align="left">nd</td>
+<td align="right">35.5</td>
+<td align="right">2.52</td>
+<td align="right">46.3</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-401.8</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">5</td>
+<td align="right">402.0</td>
+<td align="right">10.379</td>
+<td align="right">35.041</td>
+<td align="right">0.478</td>
+<td align="right">20.8</td>
+<td align="right">21.4</td>
+<td align="left">nd</td>
+<td align="right">35.5</td>
+<td align="right">2.52</td>
+<td align="right">46.1</td>
+<td align="right">0.00</td>
+<td align="right">0.07</td>
+<td align="right">-402.0</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">4</td>
+<td align="right">452.9</td>
+<td align="right">9.974</td>
+<td align="right">35.037</td>
+<td align="right">0.531</td>
+<td align="right">23.1</td>
+<td align="right">23.7</td>
+<td align="left">nd</td>
+<td align="right">35.8</td>
+<td align="right">2.56</td>
+<td align="right">48.4</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-452.9</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">3</td>
+<td align="right">503.4</td>
+<td align="right">9.606</td>
+<td align="right">35.031</td>
+<td align="right">0.459</td>
+<td align="right">20.0</td>
+<td align="right">20.5</td>
+<td align="left">nd</td>
+<td align="right">36.6</td>
+<td align="right">2.64</td>
+<td align="right">53.2</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-503.4</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">2</td>
+<td align="right">502.8</td>
+<td align="right">9.609</td>
+<td align="right">35.031</td>
+<td align="right">0.461</td>
+<td align="right">20.1</td>
+<td align="right">20.6</td>
+<td align="left">nd</td>
+<td align="right">36.6</td>
+<td align="right">2.64</td>
+<td align="right">53.2</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-502.8</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">1</td>
+<td align="right">502.8</td>
+<td align="right">9.609</td>
+<td align="right">35.032</td>
+<td align="right">0.460</td>
+<td align="right">20.0</td>
+<td align="right">20.5</td>
+<td align="left">nd</td>
+<td align="right">36.6</td>
+<td align="right">2.65</td>
+<td align="right">53.2</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-502.8</td>
+</tr>
+</tbody>
+</table>
+<p>Step 4: Generate figures for selected variable vs <code>press</code>. In Oceanography, <code>press</code> can be taken as depth.</p>
 <pre class="r"><code>plot_list = list()
 for (i in 16:20) {
         variable &lt;- colnames(data)[i]
@@ -772,7 +1280,7 @@ event &lt;- info$event</code></pre>
 <pre class="r"><code>sub_URL = &quot;&quot;
 for (i in 1:length(event)){
       sub_URL[i] &lt;- paste(&quot;http://usjgofs.whoi.edu/jg/serv/jgofs/arabian/ttn-039/bottle.flat1?event%20eq%&quot;,
-                          event[i], sep = &quot;&quot;)
+        event[i], sep = &quot;&quot;)
 }
 sub_URL</code></pre>
 <pre><code>##  [1] &quot;http://usjgofs.whoi.edu/jg/serv/jgofs/arabian/ttn-039/bottle.flat1?event%20eq%20092111.0&quot;
@@ -822,9 +1330,8 @@ for  (i in 1:length(sub_URL)){
         page_title &lt;- read_html(sub_URL[i])
         txt_data &lt;- xml_text(page_title)
         data &lt;- read.table(text=txt_data,skip=1,col.names=c('event','sta', &quot;cast&quot;, &quot;date&quot;, &quot;time&quot;, &quot;lat_begin&quot;,
-                                                            &quot;lon_begin&quot;,&quot;bot&quot;, &quot;press&quot;,&quot;temp&quot;, &quot;sal_bot&quot;,&quot;O2_ml_L&quot;,
-                                                            &quot;O2_umol_kg&quot;,&quot;O2_umol_L&quot;, &quot;O2_4&quot;, &quot;NO3&quot;, &quot;PO4&quot;, &quot;SiO4&quot;,
-                                                            &quot;NO2&quot;, &quot;NH4&quot;), na.strings = &quot;nd&quot;)
+        &quot;lon_begin&quot;,&quot;bot&quot;, &quot;press&quot;,&quot;temp&quot;, &quot;sal_bot&quot;,&quot;O2_ml_L&quot;, &quot;O2_umol_kg&quot;,&quot;O2_umol_L&quot;, &quot;O2_4&quot;, &quot;NO3&quot;,
+        &quot;PO4&quot;, &quot;SiO4&quot;, &quot;NO2&quot;, &quot;NH4&quot;), na.strings = &quot;nd&quot;)
         data$depth &lt;- -data$press
         for (j in 16:20) {
             k &lt;- k+1
@@ -833,7 +1340,8 @@ for  (i in 1:length(sub_URL)){
                 plot_list[[k]] &lt;- ggplot(data=data, mapping=aes_string(x=variable, y=&quot;depth&quot;)) +
                         geom_point() +
                         geom_path() +
-                        labs(x = colnames(data)[j], y = &quot;Depth (m)&quot;, title = paste(&quot;Event&quot;, event[i], sep = &quot; &quot;))
+                        labs(x = colnames(data)[j], y = &quot;Depth (m)&quot;, title = paste(&quot;Event&quot;, event[i],
+                            sep = &quot; &quot;))
         }
 }
 print(plot_list)</code></pre>

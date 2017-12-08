@@ -14,6 +14,9 @@ I ran into and solved the following problems when doing this homework.
 3. For Part 3, I noticed that the missing value was in `nd` on the website. In order to generate an empty figure if all values are missing, I should use `na.strings = "nd"` and then convert it to numeric form. This is because I cannot use `NA_integer_` or other similar code in `read.table()`.
 4. There is a bug of `ggplot()`. In the for loop, I used `ggplot(data=data, mapping=colnames(data)[j], y="depth"))`. Yes, it is right logically but when `j` changes, the previous figure will also be changed. This is because even though the figure is generated and saved in `plot_list`, the figure is still linked with `j` and will change. Thus, in my first trial, all figures were the same except the axis names.
 
+Overall, this homework is finished smoothly. Many problems occurred in Part 3 but they were solved finally. This work will benefit me a lot in doing my research based on big data set in Oceanography. In the future, I only need to change the top-level URL of the database and then all sub-datapage can be analyzed without downloading any files.
+
+__Please be patient when running codes in Part 3. Large dataset will be analyzed and it will take sometime.__
 
 __Useful resource__
 
@@ -76,10 +79,11 @@ result_Guangzhou <- get_weather("Guangzhou","CN","7ce93051a99b9283279834f10c83f0
 result_Shenyang <- get_weather("Shenyang","CN","7ce93051a99b9283279834f10c83f037")
 result_Changchun <- get_weather("Changchun","CN","7ce93051a99b9283279834f10c83f037")
 result_Nanchang <- get_weather("Nanchang","CN","7ce93051a99b9283279834f10c83f037")
-result_df <- rbind(result_Beijing, result_Hangzhou, result_Shanghai, result_Xiamen, result_Chengdu, result_Harbin, 
-                    result_Tianjin, result_Shijiazhuang, result_Xian, result_Jinan, result_Zhenzhou, result_Guiyang,
-                    result_Wuhan, result_Changsha, result_Lanzhou, result_Kunming, result_Nanning, result_Guangzhou,
-                    result_Shenyang, result_Changchun, result_Nanchang)
+result_df <- rbind(result_Beijing, result_Hangzhou, result_Shanghai, result_Xiamen, result_Chengdu,
+		   result_Harbin, result_Tianjin, result_Shijiazhuang, result_Xian, result_Jinan,
+		   result_Zhenzhou, result_Guiyang, result_Wuhan, result_Changsha, result_Lanzhou, 
+		   result_Kunming, result_Nanning, result_Guangzhou, result_Shenyang, 
+		   result_Changchun, result_Nanchang)
 kable(result_df)
 ```
 
@@ -92,14 +96,15 @@ leaflet() %>%
         addMarkers(lng=result_df$coord.lon, lat=result_df$coord.lat, popup=result_df$weather.description)
 ```
 
+
 Step 4: Modify the function with a for loop.
 
-It is a waste of time to get data one by one. I would like to enter all cities once and call the function only once. __This work is only designed for Chinese cities with a weather map, so the country code is only "CN". If you want to use this for other countries, the function needs to be modified slightly.__
+It is a waste of time to get data one by one. I would like to enter all cities once and call the function only once. __This work is only designed for Chinese cities with a weather map (single country), so the country code is only "CN". If you want to use this for more than one countries, the function needs to be modified slightly.__
 ```{r}
-all_result <- data.frame(matrix(ncol = 6, nrow = 0))
-col_name <- c("name", "sys.country", "coord.lon", "coord.lat", "weather.description", "main.temp")
-colnames(all_result) <- col_name
 get_weather_2 <- function(city_name, country_code, API_key) {
+	all_result <- data.frame(matrix(ncol = 6, nrow = 0))
+	col_name <- c("name", "sys.country", "coord.lon", "coord.lat", "weather.description", "main.temp")
+	colnames(all_result) <- col_name
         for (i in 1:length(city_name)){
                 query_string<-glue("api.openweathermap.org/data/2.5/weather?q={city_name[i]},{country_code}&APPID={API_key}")
                 weather_result <- GET(query_string)
@@ -114,9 +119,9 @@ get_weather_2 <- function(city_name, country_code, API_key) {
 
 Let's have a try, getting a full results and an interactive map.
 ```{r}
-city <- c("Beijing","Hangzhou","Shanghai","Xiamen","Chengdu","Harbin","Tianjin","Shijiazhuang","Xian","Jinan",
-          "Zhenzhou","Wuhan","Guiyang","Changsha","Lanzhou","Kunming","Nanning","Guangzhou","Shenyang","Changchun",
-          "Nanchang")
+city <- c("Beijing","Hangzhou","Shanghai","Xiamen","Chengdu","Harbin","Tianjin","Shijiazhuang","Xian",
+	  "Jinan","Zhenzhou","Wuhan","Guiyang","Changsha","Lanzhou","Kunming","Nanning","Guangzhou",
+	  "Shenyang","Changchun","Nanchang")
 weather_all_city <- get_weather_2(city,"CN","7ce93051a99b9283279834f10c83f037")
 kable(weather_all_city)
 leaflet() %>%
@@ -139,14 +144,14 @@ txt_data <- xml_text(page_title)
 
 Step 3: Convert the text data into a dataframe.
 ```{r}
-data <- read.table(text=txt_data,skip=1,col.names=c('event','sta', "cast", "date", "time", "lat_begin", "lon_begin",
-                                                    "bot", "press","temp", "sal_bot","O2_ml_L", "O2_umol_kg",
-                                                    "O2_umol_L", "O2_4", "NO3", "PO4", "SiO4", "NO2", "NH4"))
+data <- read.table(text=txt_data,skip=1,col.names=c('event','sta', "cast", "date", "time", "lat_begin",
+	"lon_begin", "bot", "press","temp", "sal_bot","O2_ml_L", "O2_umol_kg", "O2_umol_L", "O2_4", "NO3",
+	"PO4", "SiO4", "NO2", "NH4"))
 data$depth <- -data$press
-data
+kable(data)
 ```
 
-Step 4: Generate figures for selected variable vs `press`. `press` can be taken as depth.
+Step 4: Generate figures for selected variable vs `press`. In Oceanography, `press` can be taken as depth.
 ```{r}
 plot_list = list()
 for (i in 16:20) {
@@ -186,7 +191,7 @@ Step 4: Generating URLs for all data webpage. The URL has the commmon format, "h
 sub_URL = ""
 for (i in 1:length(event)){
       sub_URL[i] <- paste("http://usjgofs.whoi.edu/jg/serv/jgofs/arabian/ttn-039/bottle.flat1?event%20eq%",
-                          event[i], sep = "")
+		event[i], sep = "")
 }
 sub_URL
 ```
@@ -206,9 +211,8 @@ for  (i in 1:length(sub_URL)){
         page_title <- read_html(sub_URL[i])
         txt_data <- xml_text(page_title)
         data <- read.table(text=txt_data,skip=1,col.names=c('event','sta', "cast", "date", "time", "lat_begin",
-                                                            "lon_begin","bot", "press","temp", "sal_bot","O2_ml_L",
-                                                            "O2_umol_kg","O2_umol_L", "O2_4", "NO3", "PO4", "SiO4",
-                                                            "NO2", "NH4"), na.strings = "nd")
+		"lon_begin","bot", "press","temp", "sal_bot","O2_ml_L", "O2_umol_kg","O2_umol_L", "O2_4", "NO3",
+		"PO4", "SiO4", "NO2", "NH4"), na.strings = "nd")
         data$depth <- -data$press
         for (j in 16:20) {
         	k <- k+1
@@ -217,7 +221,8 @@ for  (i in 1:length(sub_URL)){
                 plot_list[[k]] <- ggplot(data=data, mapping=aes_string(x=variable, y="depth")) +
                         geom_point() +
                         geom_path() +
-                        labs(x = colnames(data)[j], y = "Depth (m)", title = paste("Event", event[i], sep = " "))
+                        labs(x = colnames(data)[j], y = "Depth (m)", title = paste("Event", event[i],
+                        	sep = " "))
         }
 }
 print(plot_list)
