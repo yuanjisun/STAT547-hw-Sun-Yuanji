@@ -2,7 +2,9 @@
 title: "Homework 10"
 author: "Yuanji Sun"
 date: "December 6, 2017"
-output: html_document
+output: 
+  html_document: 
+    keep_md: yes
 ---
 # Report process
 I ran into and solved the following problems when doing this homework.
@@ -82,17 +84,20 @@ result_df <- rbind(result_Beijing, result_Hangzhou, result_Shanghai, result_Xiam
 		   result_Zhenzhou, result_Guiyang, result_Wuhan, result_Changsha, result_Lanzhou, 
 		   result_Kunming, result_Nanning, result_Guangzhou, result_Shenyang, 
 		   result_Changchun, result_Nanchang)
+colnames(result_df) <- c("City", "Country", "longitude", "latitude", "Weather", "Temperature")
+result_df
 ```
 
-Step 3: Make an interactive map using `leaflet()` and add weather information on the pop-up. (Sorry, city names in the map are Chinese.)
+Step 3: Make an interactive map using `leaflet()` and add weather information on the pop-up.
 
 __To view this map, please see HTML version. Map is NOT supported in MD file.__
-```{r}
-leaflet() %>%
-        addTiles() %>%
-        addMarkers(lng=result_df$coord.lon, lat=result_df$coord.lat, popup=result_df$weather.description)
-```
 
+```{r}
+result_df %>%
+        leaflet() %>%   
+        addProviderTiles(providers$Esri.NatGeoWorldMap) %>%  
+        addMarkers(popup = ~ Weather)
+```
 
 Step 4: Modify the function with a for loop.
 
@@ -120,11 +125,11 @@ city <- c("Beijing","Hangzhou","Shanghai","Xiamen","Chengdu","Harbin","Tianjin",
 	  "Jinan","Zhenzhou","Wuhan","Guiyang","Changsha","Lanzhou","Kunming","Nanning","Guangzhou",
 	  "Shenyang","Changchun","Nanchang")
 weather_all_city <- get_weather_2(city,"CN","7ce93051a99b9283279834f10c83f037")
-kable(weather_all_city)
-leaflet() %>%
-        addTiles() %>%
-        addMarkers(lng=weather_all_city$coord.lon, lat=weather_all_city$coord.lat,
-                   popup=weather_all_city$weather.description)
+colnames(result_df) <- c("City", "Country", "longitude", "latitude", "Weather", "Temperature")
+result_df %>%
+        leaflet() %>%   
+        addProviderTiles(providers$Esri.NatGeoWorldMap) %>%  
+        addMarkers(popup = ~ Weather)
 ```
 
 # Part 2: Analyze oceanographic data (JGOFS) from single webpage
@@ -150,7 +155,7 @@ data$depth <- -data$press
 Step 4: Generate figures for selected variable vs `press`. In Oceanography, `press` can be taken as depth.
 ```{r}
 plot_list = list()
-for (i in 16:20) {
+for (i in 16:18) {
         variable <- colnames(data)[i]
         plot_list[[i-15]] <- ggplot(data=data, mapping=aes_string(x=variable, y="depth")) +
         	geom_point() +
@@ -210,7 +215,7 @@ for  (i in 1:length(sub_URL)){
 		"lon_begin","bot", "press","temp", "sal_bot","O2_ml_L", "O2_umol_kg","O2_umol_L", "O2_4", "NO3",
 		"PO4", "SiO4", "NO2", "NH4"), na.strings = "nd")
         data$depth <- -data$press
-        for (j in 16:20) {
+        for (j in 16:18) {
         	k <- k+1
                 variable <- colnames(data)[j]
                 data[[variable]] <- as.numeric(data[[variable]])
