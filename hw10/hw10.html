@@ -248,15 +248,15 @@ colnames(result_df) &lt;- c(&quot;City&quot;, &quot;Country&quot;, &quot;longitu
 result_df</code></pre>
 <pre><code>##            City Country longitude latitude         Weather Temperature
 ## 1       Beijing      CN    116.40    39.91       clear sky     282.150
-## 2      Hangzhou      CN    120.16    30.29       clear sky     282.150
-## 3      Shanghai      CN    121.46    31.22       clear sky     281.680
+## 2      Hangzhou      CN    120.16    30.29       clear sky     281.150
+## 3      Shanghai      CN    121.46    31.22       clear sky     281.150
 ## 4        Xiamen      CN    118.08    24.48       clear sky     290.150
-## 5       Chengdu      CN    104.07    30.67       clear sky     288.150
+## 5       Chengdu      CN    104.07    30.67       clear sky     289.150
 ## 6        Harbin      CN    126.65    45.75      light snow     263.150
 ## 7       Tianjin      CN    117.18    39.14       clear sky     280.150
 ## 8  Shijiazhuang      CN    114.48    38.04       clear sky     284.150
-## 9          Xian      CN    108.93    34.26       clear sky     279.150
-## 10        Jinan      CN    117.00    36.67       clear sky     278.583
+## 9          Xian      CN    108.93    34.26       clear sky     280.150
+## 10        Jinan      CN    117.00    36.67       clear sky     275.042
 ## 11     Zhenzhou      CN    119.18    32.27       clear sky     280.150
 ## 12      Guiyang      CN    106.72    26.58 overcast clouds     279.150
 ## 13        Wuhan      CN    114.27    30.58       clear sky     283.150
@@ -267,7 +267,7 @@ result_df</code></pre>
 ## 18    Guangzhou      CN    113.25    23.12       clear sky     293.150
 ## 19     Shenyang      CN    123.43    41.79       clear sky     273.150
 ## 20    Changchun      CN    125.32    43.88      light snow     264.150
-## 21     Nanchang      CN    115.88    28.68       clear sky     282.758</code></pre>
+## 21     Nanchang      CN    115.88    28.68       clear sky     280.092</code></pre>
 <p>Step 3: Make an interactive map using <code>leaflet()</code> and add weather information on the pop-up.</p>
 <p><strong>To view this map, please see HTML version. Map is NOT supported in MD file.</strong></p>
 <pre class="r"><code>result_df %&gt;%
@@ -275,8 +275,8 @@ result_df</code></pre>
         addProviderTiles(providers$Esri.NatGeoWorldMap) %&gt;%  
         addMarkers(popup = ~ Weather)</code></pre>
 <pre><code>## Assuming 'longitude' and 'latitude' are longitude and latitude, respectively</code></pre>
-<div id="htmlwidget-c3c57c0d0cdae966c37d" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c3c57c0d0cdae966c37d">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]},{"method":"addMarkers","args":[[39.91,30.29,31.22,24.48,30.67,45.75,39.14,38.04,34.26,36.67,32.27,26.58,30.58,28.2,36.06,25.04,22.82,23.12,41.79,43.88,28.68],[116.4,120.16,121.46,118.08,104.07,126.65,117.18,114.48,108.93,117,119.18,106.72,114.27,112.97,103.79,102.72,108.32,113.25,123.43,125.32,115.88],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["clear sky","clear sky","clear sky","clear sky","clear sky","light snow","clear sky","clear sky","clear sky","clear sky","clear sky","overcast clouds","clear sky","clear sky","clear sky","mist","clear sky","clear sky","clear sky","light snow","clear sky"],null,null,null,null,null,null]}],"limits":{"lat":[22.82,45.75],"lng":[102.72,126.65]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-5a685d5470c0dec5fe1b" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5a685d5470c0dec5fe1b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]},{"method":"addMarkers","args":[[39.91,30.29,31.22,24.48,30.67,45.75,39.14,38.04,34.26,36.67,32.27,26.58,30.58,28.2,36.06,25.04,22.82,23.12,41.79,43.88,28.68],[116.4,120.16,121.46,118.08,104.07,126.65,117.18,114.48,108.93,117,119.18,106.72,114.27,112.97,103.79,102.72,108.32,113.25,123.43,125.32,115.88],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["clear sky","clear sky","clear sky","clear sky","clear sky","light snow","clear sky","clear sky","clear sky","clear sky","clear sky","overcast clouds","clear sky","clear sky","clear sky","mist","clear sky","clear sky","clear sky","light snow","clear sky"],null,null,null,null,null,null]}],"limits":{"lat":[22.82,45.75],"lng":[102.72,126.65]}},"evals":[],"jsHooks":[]}</script>
 <p>Step 4: Modify the function with a for loop.</p>
 <p>It is a waste of time to get data one by one. I would like to enter all cities once and call the function only once. <strong>This work is only designed for Chinese cities with a weather map (single country), so the country code is only “CN”. If you want to use this for more than one countries, the function needs to be modified slightly.</strong></p>
 <pre class="r"><code>get_weather_2 &lt;- function(city_name, country_code, API_key) {
@@ -304,8 +304,8 @@ result_df %&gt;%
         addProviderTiles(providers$Esri.NatGeoWorldMap) %&gt;%  
         addMarkers(popup = ~ Weather)</code></pre>
 <pre><code>## Assuming 'longitude' and 'latitude' are longitude and latitude, respectively</code></pre>
-<div id="htmlwidget-05ee7360f5a90e6e3059" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-05ee7360f5a90e6e3059">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]},{"method":"addMarkers","args":[[39.91,30.29,31.22,24.48,30.67,45.75,39.14,38.04,34.26,36.67,32.27,26.58,30.58,28.2,36.06,25.04,22.82,23.12,41.79,43.88,28.68],[116.4,120.16,121.46,118.08,104.07,126.65,117.18,114.48,108.93,117,119.18,106.72,114.27,112.97,103.79,102.72,108.32,113.25,123.43,125.32,115.88],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["clear sky","clear sky","clear sky","clear sky","clear sky","light snow","clear sky","clear sky","clear sky","clear sky","clear sky","overcast clouds","clear sky","clear sky","clear sky","mist","clear sky","clear sky","clear sky","light snow","clear sky"],null,null,null,null,null,null]}],"limits":{"lat":[22.82,45.75],"lng":[102.72,126.65]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-7682452a5b48d87817b2" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7682452a5b48d87817b2">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]},{"method":"addMarkers","args":[[39.91,30.29,31.22,24.48,30.67,45.75,39.14,38.04,34.26,36.67,32.27,26.58,30.58,28.2,36.06,25.04,22.82,23.12,41.79,43.88,28.68],[116.4,120.16,121.46,118.08,104.07,126.65,117.18,114.48,108.93,117,119.18,106.72,114.27,112.97,103.79,102.72,108.32,113.25,123.43,125.32,115.88],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["clear sky","clear sky","clear sky","clear sky","clear sky","light snow","clear sky","clear sky","clear sky","clear sky","clear sky","overcast clouds","clear sky","clear sky","clear sky","mist","clear sky","clear sky","clear sky","light snow","clear sky"],null,null,null,null,null,null]}],"limits":{"lat":[22.82,45.75],"lng":[102.72,126.65]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="part-2-analyze-oceanographic-data-jgofs-from-single-webpage" class="section level1">
 <h1>Part 2: Analyze oceanographic data (JGOFS) from single webpage</h1>
@@ -318,7 +318,589 @@ page_title &lt;- read_html(url)</code></pre>
 <pre class="r"><code>data &lt;- read.table(text=txt_data,skip=1,col.names=c('event','sta', &quot;cast&quot;, &quot;date&quot;, &quot;time&quot;, &quot;lat_begin&quot;,
     &quot;lon_begin&quot;, &quot;bot&quot;, &quot;press&quot;,&quot;temp&quot;, &quot;sal_bot&quot;,&quot;O2_ml_L&quot;, &quot;O2_umol_kg&quot;, &quot;O2_umol_L&quot;, &quot;O2_4&quot;, &quot;NO3&quot;,
     &quot;PO4&quot;, &quot;SiO4&quot;, &quot;NO2&quot;, &quot;NH4&quot;))
-data$depth &lt;- -data$press</code></pre>
+data$depth &lt;- -data$press
+kable(data)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">event</th>
+<th align="right">sta</th>
+<th align="right">cast</th>
+<th align="right">date</th>
+<th align="right">time</th>
+<th align="right">lat_begin</th>
+<th align="right">lon_begin</th>
+<th align="right">bot</th>
+<th align="right">press</th>
+<th align="right">temp</th>
+<th align="right">sal_bot</th>
+<th align="right">O2_ml_L</th>
+<th align="right">O2_umol_kg</th>
+<th align="right">O2_umol_L</th>
+<th align="left">O2_4</th>
+<th align="right">NO3</th>
+<th align="right">PO4</th>
+<th align="right">SiO4</th>
+<th align="right">NO2</th>
+<th align="right">NH4</th>
+<th align="right">depth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">24</td>
+<td align="right">0.7</td>
+<td align="right">28.397</td>
+<td align="right">33.366</td>
+<td align="right">4.557</td>
+<td align="right">199.3</td>
+<td align="right">203.5</td>
+<td align="left">nd</td>
+<td align="right">0.1</td>
+<td align="right">0.08</td>
+<td align="right">2.9</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-0.7</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">23</td>
+<td align="right">0.7</td>
+<td align="right">28.399</td>
+<td align="right">33.365</td>
+<td align="right">4.562</td>
+<td align="right">199.5</td>
+<td align="right">203.7</td>
+<td align="left">nd</td>
+<td align="right">0.1</td>
+<td align="right">0.08</td>
+<td align="right">2.9</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-0.7</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">22</td>
+<td align="right">26.2</td>
+<td align="right">28.145</td>
+<td align="right">33.360</td>
+<td align="right">4.567</td>
+<td align="right">199.7</td>
+<td align="right">204.0</td>
+<td align="left">nd</td>
+<td align="right">0.1</td>
+<td align="right">0.10</td>
+<td align="right">2.9</td>
+<td align="right">0.00</td>
+<td align="right">0.10</td>
+<td align="right">-26.2</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">21</td>
+<td align="right">51.3</td>
+<td align="right">28.052</td>
+<td align="right">33.343</td>
+<td align="right">4.522</td>
+<td align="right">197.7</td>
+<td align="right">201.9</td>
+<td align="left">nd</td>
+<td align="right">0.1</td>
+<td align="right">0.10</td>
+<td align="right">2.9</td>
+<td align="right">0.01</td>
+<td align="right">0.09</td>
+<td align="right">-51.3</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">20</td>
+<td align="right">75.9</td>
+<td align="right">26.386</td>
+<td align="right">33.608</td>
+<td align="right">3.882</td>
+<td align="right">169.7</td>
+<td align="right">173.4</td>
+<td align="left">nd</td>
+<td align="right">2.8</td>
+<td align="right">0.36</td>
+<td align="right">5.5</td>
+<td align="right">0.43</td>
+<td align="right">0.17</td>
+<td align="right">-75.9</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">19</td>
+<td align="right">101.2</td>
+<td align="right">21.500</td>
+<td align="right">34.362</td>
+<td align="right">1.797</td>
+<td align="right">78.4</td>
+<td align="right">80.3</td>
+<td align="left">nd</td>
+<td align="right">18.3</td>
+<td align="right">1.35</td>
+<td align="right">18.8</td>
+<td align="right">0.04</td>
+<td align="right">0.02</td>
+<td align="right">-101.2</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">18</td>
+<td align="right">101.3</td>
+<td align="right">21.450</td>
+<td align="right">34.362</td>
+<td align="right">1.799</td>
+<td align="right">78.5</td>
+<td align="right">80.3</td>
+<td align="left">nd</td>
+<td align="right">18.5</td>
+<td align="right">1.36</td>
+<td align="right">18.8</td>
+<td align="right">0.04</td>
+<td align="right">0.01</td>
+<td align="right">-101.3</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">17</td>
+<td align="right">101.2</td>
+<td align="right">21.337</td>
+<td align="right">34.365</td>
+<td align="right">1.791</td>
+<td align="right">78.1</td>
+<td align="right">80.0</td>
+<td align="left">nd</td>
+<td align="right">18.5</td>
+<td align="right">1.36</td>
+<td align="right">19.0</td>
+<td align="right">0.04</td>
+<td align="right">0.08</td>
+<td align="right">-101.2</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">16</td>
+<td align="right">151.1</td>
+<td align="right">13.812</td>
+<td align="right">34.949</td>
+<td align="right">0.636</td>
+<td align="right">27.7</td>
+<td align="right">28.4</td>
+<td align="left">nd</td>
+<td align="right">30.5</td>
+<td align="right">2.17</td>
+<td align="right">34.2</td>
+<td align="right">0.01</td>
+<td align="right">0.01</td>
+<td align="right">-151.1</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">15</td>
+<td align="right">201.5</td>
+<td align="right">13.141</td>
+<td align="right">34.989</td>
+<td align="right">0.607</td>
+<td align="right">26.4</td>
+<td align="right">27.1</td>
+<td align="left">nd</td>
+<td align="right">31.5</td>
+<td align="right">2.24</td>
+<td align="right">35.5</td>
+<td align="right">0.00</td>
+<td align="right">0.02</td>
+<td align="right">-201.5</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">14</td>
+<td align="right">201.7</td>
+<td align="right">13.141</td>
+<td align="right">34.987</td>
+<td align="right">0.619</td>
+<td align="right">26.9</td>
+<td align="right">27.6</td>
+<td align="left">nd</td>
+<td align="right">31.5</td>
+<td align="right">2.24</td>
+<td align="right">35.5</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-201.7</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">13</td>
+<td align="right">202.0</td>
+<td align="right">13.135</td>
+<td align="right">34.989</td>
+<td align="right">0.609</td>
+<td align="right">26.5</td>
+<td align="right">27.2</td>
+<td align="left">nd</td>
+<td align="right">31.6</td>
+<td align="right">2.24</td>
+<td align="right">35.5</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-202.0</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">12</td>
+<td align="right">252.0</td>
+<td align="right">11.979</td>
+<td align="right">35.032</td>
+<td align="right">0.602</td>
+<td align="right">26.2</td>
+<td align="right">26.9</td>
+<td align="left">nd</td>
+<td align="right">32.7</td>
+<td align="right">2.31</td>
+<td align="right">37.4</td>
+<td align="right">0.00</td>
+<td align="right">0.02</td>
+<td align="right">-252.0</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">11</td>
+<td align="right">302.4</td>
+<td align="right">11.201</td>
+<td align="right">35.027</td>
+<td align="right">0.529</td>
+<td align="right">23.0</td>
+<td align="right">23.6</td>
+<td align="left">nd</td>
+<td align="right">34.1</td>
+<td align="right">2.42</td>
+<td align="right">42.6</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-302.4</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">10</td>
+<td align="right">302.2</td>
+<td align="right">11.204</td>
+<td align="right">35.027</td>
+<td align="right">0.532</td>
+<td align="right">23.2</td>
+<td align="right">23.8</td>
+<td align="left">nd</td>
+<td align="right">34.1</td>
+<td align="right">2.41</td>
+<td align="right">42.6</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-302.2</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">9</td>
+<td align="right">302.5</td>
+<td align="right">11.202</td>
+<td align="right">35.027</td>
+<td align="right">0.542</td>
+<td align="right">23.6</td>
+<td align="right">24.2</td>
+<td align="left">nd</td>
+<td align="right">34.1</td>
+<td align="right">2.41</td>
+<td align="right">42.7</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-302.5</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">8</td>
+<td align="right">352.2</td>
+<td align="right">10.724</td>
+<td align="right">35.046</td>
+<td align="right">0.536</td>
+<td align="right">23.3</td>
+<td align="right">23.9</td>
+<td align="left">nd</td>
+<td align="right">34.6</td>
+<td align="right">2.44</td>
+<td align="right">44.3</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-352.2</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">7</td>
+<td align="right">401.9</td>
+<td align="right">10.379</td>
+<td align="right">35.041</td>
+<td align="right">0.481</td>
+<td align="right">20.9</td>
+<td align="right">21.5</td>
+<td align="left">nd</td>
+<td align="right">35.5</td>
+<td align="right">2.52</td>
+<td align="right">47.1</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-401.9</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">6</td>
+<td align="right">401.8</td>
+<td align="right">10.379</td>
+<td align="right">35.041</td>
+<td align="right">0.477</td>
+<td align="right">20.8</td>
+<td align="right">21.3</td>
+<td align="left">nd</td>
+<td align="right">35.5</td>
+<td align="right">2.52</td>
+<td align="right">46.3</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-401.8</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">5</td>
+<td align="right">402.0</td>
+<td align="right">10.379</td>
+<td align="right">35.041</td>
+<td align="right">0.478</td>
+<td align="right">20.8</td>
+<td align="right">21.4</td>
+<td align="left">nd</td>
+<td align="right">35.5</td>
+<td align="right">2.52</td>
+<td align="right">46.1</td>
+<td align="right">0.00</td>
+<td align="right">0.07</td>
+<td align="right">-402.0</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">4</td>
+<td align="right">452.9</td>
+<td align="right">9.974</td>
+<td align="right">35.037</td>
+<td align="right">0.531</td>
+<td align="right">23.1</td>
+<td align="right">23.7</td>
+<td align="left">nd</td>
+<td align="right">35.8</td>
+<td align="right">2.56</td>
+<td align="right">48.4</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-452.9</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">3</td>
+<td align="right">503.4</td>
+<td align="right">9.606</td>
+<td align="right">35.031</td>
+<td align="right">0.459</td>
+<td align="right">20.0</td>
+<td align="right">20.5</td>
+<td align="left">nd</td>
+<td align="right">36.6</td>
+<td align="right">2.64</td>
+<td align="right">53.2</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-503.4</td>
+</tr>
+<tr class="odd">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">2</td>
+<td align="right">502.8</td>
+<td align="right">9.609</td>
+<td align="right">35.031</td>
+<td align="right">0.461</td>
+<td align="right">20.1</td>
+<td align="right">20.6</td>
+<td align="left">nd</td>
+<td align="right">36.6</td>
+<td align="right">2.64</td>
+<td align="right">53.2</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-502.8</td>
+</tr>
+<tr class="even">
+<td align="right">92111</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">19940921</td>
+<td align="right">11</td>
+<td align="right">5.687</td>
+<td align="right">87.965</td>
+<td align="right">1</td>
+<td align="right">502.8</td>
+<td align="right">9.609</td>
+<td align="right">35.032</td>
+<td align="right">0.460</td>
+<td align="right">20.0</td>
+<td align="right">20.5</td>
+<td align="left">nd</td>
+<td align="right">36.6</td>
+<td align="right">2.65</td>
+<td align="right">53.2</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">-502.8</td>
+</tr>
+</tbody>
+</table>
 <p>Step 4: Generate figures for selected variable vs <code>press</code>. In Oceanography, <code>press</code> can be taken as depth.</p>
 <pre class="r"><code>plot_list = list()
 for (i in 16:18) {

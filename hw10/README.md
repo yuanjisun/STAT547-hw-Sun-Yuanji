@@ -14,6 +14,8 @@ __Since an interactive map is used in my homework, which is not supported by MD 
 
 [Link to RMD file](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/blob/master/hw10/hw10.Rmd)
 
+[Link to MD file](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/blob/master/hw10/hw10.md)
+
 [Link to HTML file](https://github.com/yuanjisun/STAT547-hw-Sun-Yuanji/blob/master/hw10/hw10.html)
 
 __Report process__
